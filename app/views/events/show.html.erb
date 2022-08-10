@@ -14,5 +14,11 @@
 <% unless @event.description.blank? %>
   <p class="event-description"><strong>Details:</strong> <%= @event.description %></p>
 <% end %>
+<h4>Attendees:</h4>
+  <ul>
+    <% @event.attendees.each do |attendee| %>
+      <li><%= attendee.username %></li>
+    <% end %>
+  </ul>
 <%= link_to 'Register for This Event', new_event_registration_path(@event) %>
 <div class="error"><%= flash[:page_registration_error] %></div>
