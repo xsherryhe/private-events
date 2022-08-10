@@ -2,7 +2,7 @@
 <% @events.each do |event| %>
   <div class="event">
     <h4 class="event-name"><%= event.name %></h4>
-    <% ['happening_at', 'location'].each do |attribute| %>
+    <% %w(happening_at location).each do |attribute| %>
       <% if event[attribute] %>
         <h4 class="event-<%= attribute %>"><%= event[attribute] %></h4>
       <% end %>

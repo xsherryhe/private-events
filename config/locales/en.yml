@@ -31,3 +31,11 @@
 
 en:
   hello: "Hello world"
+  activerecord:
+    attributes:
+      event:
+        happening_at: "Event time"
+        happening_date: "Event date"
+        happening_hour: "Event hour"
+        happening_minute: "Event minute"
+        happening_ampm: "Event AM/PM selection"

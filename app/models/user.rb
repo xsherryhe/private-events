@@ -21,7 +21,7 @@ class User < ApplicationRecord
 
   def self.find_for_database_authentication(warden_conditions)
     conditions = warden_conditions.dup
-    [:email, :username].each do |attribute|
+    %i(email username).each do |attribute|
       conditions[attribute].downcase! if conditions[attribute]
     end
     if(login = conditions.delete(:login))
