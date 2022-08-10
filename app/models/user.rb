@@ -10,7 +10,7 @@ class User < ApplicationRecord
   validates :password, format: { with: /\A(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$@!%&*?]).*\Z/,
                                  message: "must contain at least 1 of each: " \
                                           "uppercase letter, lowercase letter, digit, symbol" },
-                       unless: -> { password.nil? }
+                       allow_blank: true
   has_many :created_events, class_name: "Event", foreign_key: "creator_id"
   has_many :event_registrations
   has_many :attended_events, through: :event_registrations, foreign_key: "attendee_id"
