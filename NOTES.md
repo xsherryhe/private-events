@@ -6,11 +6,11 @@ User
 -password, presence: true, includes upcase downcase num symbol, min 6 chars
 has_many :created_events, class_name: Event, foreign_key: "creator_id"
 has_many :event_registrations
-has_many :attending_events, through: :event_registrations, foreign_key: "attendee_id"
+has_many :attended_events, through: :event_registrations, foreign_key: "attendee_id"
 
 EventRegistration
 belongs_to :attendee, class_name: User
-belongs_to :event
+belongs_to :attended_event
 
 Event
 -name, presence: true
@@ -18,4 +18,5 @@ Event
 -location
 -description
 belongs_to :creator, class_name: User
-has_many :attendees, through: :event_registrations
+has_many :event_registrations
+has_many :attendees, through: :event_registrations, foreign_key: "attended_event_id"
