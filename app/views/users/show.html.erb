@@ -1,2 +1,5 @@
 <h2><%= @user.username %>'s Created Events</h2>
 <%= render "shared/events_list", events: @user.created_events %>
+
+<h2><%= @user.username %>'s Attended Events</h2>
+<%= render "shared/events_list", events: @user.attended_events %>

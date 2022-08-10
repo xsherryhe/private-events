@@ -13,7 +13,9 @@
   <body>
     <div class="flash">
       <% flash.each do |name, message| %>
-        <p class="<%= name %>"><%= message %></p>
+        <% unless name.include? 'page' %>
+          <p class="<%= name %>"><%= message %></p>
+        <% end %>
       <% end %>
     </div>
 

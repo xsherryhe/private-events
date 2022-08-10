@@ -13,6 +13,7 @@ class EventsController < ApplicationController
     @event = current_user.created_events.build(event_params)
 
     if @event.save
+      current_user.attended_events << @event
       redirect_to current_user
     else
       render :new, status: :unprocessable_entity

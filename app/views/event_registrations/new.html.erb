@@ -1,0 +1,17 @@
+<h2>Register for Event "<%= @event.name %>"</h2>
+
+<%= form_with model: @event_registration do |form| %>
+  <div class="attendee"><strong>Attendee:</strong> <%= @event_registration.attendee.username %></div>
+  <div class="attended-event"><strong>Event:</strong> <%= @event.name %></div>
+  <% @event_registration.errors[:base].each do |message| %>
+    <p class="error"><%= message %></p>
+  <% end %>
+  <div class="field">
+    <%= form.label :notes, 'Notes' %>
+    <%= form.text_area :notes, placeholder: 'Provide any notes, questions, or concerns for the host (e.g., cost, timing, food allergies).' %>
+    <% @event_registration.errors.full_messages_for(:notes).each do |message| %>
+      <p class="error"><%= message %></p>
+    <% end %>
+  </div>
+  <%= form.submit 'Register for Event' %>
+<% end %>
