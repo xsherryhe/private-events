@@ -1,14 +1,2 @@
 <h2>All Events</h2>
-<% @events.each do |event| %>
-  <div class="event">
-    <h4 class="event-name"><%= event.name %></h4>
-    <% ['happening_at', 'location'].each do |attribute| %>
-      <% if event[attribute] %>
-        <h4 class="event-<%= attribute %>"><%= event[attribute] %></h4>
-      <% end %>
-    <% end %>
-    <% if event.description %>
-      <p class="event-description"><%= event.description %></p>
-    <% end %>
-  </div>
-<% end %>
+<%= render "shared/events_list", events: @events %>

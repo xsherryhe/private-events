@@ -31,3 +31,9 @@
 
 en:
   hello: "Hello world"
+  activerecord:
+    attributes:
+      event:
+        happening_at: "Event date/time"
+        happening_date: "Event date"
+        happening_time: "Event time"
