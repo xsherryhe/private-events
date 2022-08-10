@@ -1,5 +1,5 @@
-<h2>All Events</h2>
-<% @events.each do |event| %>
+<h2><%= @user.username %>'s Created Events</h2>
+<% @user.created_events.each do |event| %>
   <div class="event">
     <h4 class="event-name"><%= event.name %></h4>
     <% ['happening_at', 'location'].each do |attribute| %>

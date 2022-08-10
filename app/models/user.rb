@@ -11,6 +11,7 @@ class User < ApplicationRecord
                                  message: "must contain at least 1 of each: " \
                                           "uppercase letter, lowercase letter, digit, symbol" },
                        unless: -> { password.nil? }
+  has_many :created_events, class_name: "Event", foreign_key: "creator_id"
   
   attr_writer :login
 
