@@ -1,17 +1,6 @@
 <% events.each do |event| %>
   <div class="event">
-    <h4 class="event-name"><%= event.name %></h4>
+    <h4 class="event-name"><%= link_to event.name, event %></h4>
     <h4 class="event-creator">Hosted by: <%= event.creator.username %></h4>
-    <h4 class="event-date-time">
-      <%= [event.happening_date&.strftime("%B %-d, %Y"), 
-           event.happening_time&.strftime("%-I:%M %p")]
-          .compact.join(' at ') %>
-    </h4>
-    <% if event.location %>
-      <h4 class="event-location"><%= event.location %></h4>
-    <% end %>
-    <% if event.description %>
-      <p class="event-description"><%= event.description %></p>
-    <% end %>
   </div>
 <% end %>
