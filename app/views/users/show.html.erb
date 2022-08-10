@@ -1,13 +1,16 @@
 <h2><%= @user.username %>'s Created Events</h2>
 <%= render "shared/events_list", events: @user.created_events %>
 
-<h2><%= @user.username %>'s Events to Attend</h2>
+<h2><%= @user.username %>'s Upcoming Events to Attend</h2>
 <% future_events = 
     @user.attended_events
          .where('happening_date > ?', Date.current)
          .or(@user.attended_events
                   .where(happening_date: Date.current)
-                  .where('happening_date >= ?', Time.current))
+                  .where('happening_time >= ?', Time.current))
+         .or(@user.attended_events
+                  .where(happening_date: Date.current)
+                  .where(happening_time: nil))
          .or(@user.attended_events
                   .where(happening_date: nil)) %>
 <%= render "shared/events_list", events: future_events %>
@@ -18,6 +21,6 @@
          .where('happening_date < ?', Date.current)
          .or(@user.attended_events
                   .where(happening_date: Date.current)
-                  .where('happening_date < ?', Time.current)) %>
+                  .where('happening_time < ?', Time.current)) %>
 <%= render "shared/events_list", 
     events: past_events %>

@@ -1,2 +1,5 @@
-<h2>All Events</h2>
-<%= render "shared/events_list", events: @events %>
+<h2>Upcoming Events</h2>
+<%= render "shared/events_list", events: @events.future %>
+
+<h2>Past Events</h2>
+<%= render "shared/events_list", events: @events.past %>

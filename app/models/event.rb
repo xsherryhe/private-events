@@ -3,4 +3,16 @@ class Event < ApplicationRecord
   belongs_to :creator, class_name: "User"
   has_many :event_registrations, foreign_key: "attended_event_id"
   has_many :attendees, through: :event_registrations
+
+  def self.future
+    where('happening_date > ?', Date.current)
+   .or(where(happening_date: Date.current).where('happening_time >= ?', Time.current))
+   .or(where(happening_date: Date.current).where(happening_time: nil))
+   .or(where(happening_date: nil))
+  end
+
+  def self.past
+    where('happening_date < ?', Date.current)
+   .or(where(happening_date: Date.current).where('happening_time < ?', Time.current))
+  end
 end
