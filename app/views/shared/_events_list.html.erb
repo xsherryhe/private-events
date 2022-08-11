@@ -1,7 +1,10 @@
-<% events.includes(:creator, :attendees).each do |event| %>
-  <div class="event">
-    <h4 class="event-name"><%= link_to event.name, event %></h4>
-    <h4 class="event-creator">Hosted by: <%= link_to event.creator.username, user_path(event.creator) %></h4>
-    <%= render 'shared/event_links', event: event, curr_user: curr_user %>
-  </div>
+<% unless events.empty? %>
+  <h2><%= list_name %></h2>
+  <% events.includes(:creator, :attendees).each do |event| %>
+    <div class="event">
+      <h4 class="event-name"><%= link_to event.name, event %></h4>
+      <h4 class="event-creator">Hosted by: <%= link_to event.creator.username, user_path(event.creator) %></h4>
+      <%= render 'shared/event_links', event: event, curr_user: curr_user %>
+    </div>
+  <% end %>
 <% end %>
