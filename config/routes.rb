@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   
   resources :users, only: [:show]
-  resources :events, only: [:index, :new, :create, :show] do
+  resources :events do
     resources :registrations, only: [:new, :create], controller: 'event_registrations'
   end
   resources :my_events, only: [:index]
