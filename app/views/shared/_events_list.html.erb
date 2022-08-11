@@ -2,5 +2,6 @@
   <div class="event">
     <h4 class="event-name"><%= link_to event.name, event %></h4>
     <h4 class="event-creator">Hosted by: <%= link_to event.creator.username, user_path(event.creator) %></h4>
+    <%= render 'shared/event_links', event: event %>
   </div>
 <% end %>
