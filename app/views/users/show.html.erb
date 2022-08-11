@@ -1,9 +1,8 @@
 <h2><%= @user.username %>'s Created Events</h2>
-<%= render "shared/events_list", events: @user.created_events %>
+<%= render "shared/events_list", events: @user.created_events, curr_user: @curr_user %>
 
-<% attended_events = @user.attended_events %>
 <h2><%= @user.username %>'s Upcoming Events to Attend</h2>
-<%= render "shared/future_events_list", events: attended_events %>
+<%= render "shared/future_events_list", events: @attended_events, curr_user: @curr_user %>
 
 <h2><%= @user.username %>'s Past Attended Events</h2>
-<%= render "shared/past_events_list", events: attended_events %>
+<%= render "shared/past_events_list", events: @attended_events, curr_user: @curr_user %>

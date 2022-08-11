@@ -1,5 +1,5 @@
 <h2>Upcoming Events</h2>
-<%= render "shared/future_events_list", events: @events %>
+<%= render "shared/future_events_list", events: @events, curr_user: @curr_user %>
 
 <h2>Past Events</h2>
-<%= render "shared/past_events_list", events: @events %>
+<%= render "shared/past_events_list", events: @events, curr_user: @curr_user %>

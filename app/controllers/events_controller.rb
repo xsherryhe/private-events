@@ -3,6 +3,7 @@ class EventsController < ApplicationController
 
   def index
     @events = Event.all
+    @curr_user = current_user
   end
 
   def new
@@ -46,6 +47,8 @@ class EventsController < ApplicationController
 
   def show
     @event = Event.find(params[:id])
+    @creator = @event.creator
+    @attendees = @event.attendees
   end
 
   def destroy

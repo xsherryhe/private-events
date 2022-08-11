@@ -1,5 +1,5 @@
-<% if event.attendees.include?(current_user) %>
-  <% event_registration = event.event_registrations.find_by(attendee_id: current_user.id) %>
+<% if event.attendees.include?(curr_user) %>
+  <% event_registration = event.event_registrations.find_by(attendee_id: curr_user.id) %>
   <%= link_to 'Edit Registration for This Event', edit_event_registration_path(event, event_registration) %>
   <%= link_to 'Unregister From This Event', 
               event_registration_path(event, event_registration),
