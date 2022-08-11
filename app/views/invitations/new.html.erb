@@ -1,0 +1,22 @@
+<h2>Invite a User to Event "<%= @event.name %>"</h2>
+
+<%= form_with model: [@event, @invitation] do |form| %>
+  <div class="invited-event"><strong>Event:</strong> <%= @event.name %></div>
+  <div class="field">
+    <strong><%= form.label :invitee_username, "Username of invited user:" %></strong>
+    <%= form.text_field :invitee_username %>
+    <% %i(invitee_username invitee).each do |attribute| %>
+      <% @invitation.errors.full_messages_for(attribute).each do |message| %>
+        <p class="error"><%= message %></p>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="field">
+    <%= form.label :notes, 'Notes' %>
+    <%= form.text_area :notes, placeholder: 'Provide any notes or questions for the invited user (e.g., cost, timing, food allergies).' %>
+    <% @invitation.errors.full_messages_for(:notes).each do |message| %>
+      <p class="error"><%= message %></p>
+    <% end %>
+  </div>
+  <%= form.submit 'Invite' %>
+<% end %>

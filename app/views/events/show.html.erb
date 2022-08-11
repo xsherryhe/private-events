@@ -20,4 +20,13 @@
       <li><%= link_to attendee.username, user_path(attendee) %></li>
     <% end %>
   </ul>
+
+<% if current_user == @creator %>
+  <h4>Invited:</h4>
+    <ul>
+      <% @event.invitees.where.not(id: @attendees).each do |invitee| %>
+        <li><%= link_to invitee.username, user_path(invitee) %></li>
+      <% end %>
+    </ul>
+<% end %>
 <%= render 'shared/event_links', event: @event, curr_user: current_user %>
