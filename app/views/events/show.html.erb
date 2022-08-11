@@ -1,5 +1,5 @@
 <h4 class="event-name"><%= @event.name %></h4>
-<h4 class="event-creator">Hosted by: <%= @event.creator.username %></h4>
+<h4 class="event-creator">Hosted by: <%= link_to @event.creator.username, user_path(@event.creator) %></h4>
 <% unless %w(happening_date happening_time).all? { |attribute| @event[attribute].blank? } %>
   <h4 class="event-date-time">
     When: 
@@ -17,7 +17,7 @@
 <h4>Attendees:</h4>
   <ul>
     <% @event.attendees.each do |attendee| %>
-      <li><%= attendee.username %></li>
+      <li><%= link_to attendee.username, user_path(attendee) %></li>
     <% end %>
   </ul>
 <%= link_to 'Register for This Event', new_event_registration_path(@event) %>

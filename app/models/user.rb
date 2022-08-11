@@ -11,8 +11,8 @@ class User < ApplicationRecord
                                  message: "must contain at least 1 of each: " \
                                           "uppercase letter, lowercase letter, digit, symbol" },
                        allow_blank: true
-  has_many :created_events, class_name: "Event", foreign_key: "creator_id"
-  has_many :event_registrations, foreign_key: "attendee_id"
+  has_many :created_events, class_name: "Event", foreign_key: "creator_id", dependent: :destroy
+  has_many :event_registrations, foreign_key: "attendee_id", dependent: :destroy
   has_many :attended_events, through: :event_registrations
   
   attr_writer :login

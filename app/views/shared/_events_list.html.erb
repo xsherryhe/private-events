@@ -1,6 +1,6 @@
 <% events.each do |event| %>
   <div class="event">
     <h4 class="event-name"><%= link_to event.name, event %></h4>
-    <h4 class="event-creator">Hosted by: <%= event.creator.username %></h4>
+    <h4 class="event-creator">Hosted by: <%= link_to event.creator.username, user_path(event.creator) %></h4>
   </div>
 <% end %>
