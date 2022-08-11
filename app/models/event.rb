@@ -3,6 +3,7 @@ class Event < ApplicationRecord
   belongs_to :creator, class_name: "User"
   has_many :event_registrations, foreign_key: "attended_event_id", dependent: :destroy
   has_many :attendees, through: :event_registrations
+  has_many :invitations, dependent: :destroy
 
   scope :future, (lambda do
     where('happening_date > ?', Date.current)

@@ -14,6 +14,9 @@ class User < ApplicationRecord
   has_many :created_events, class_name: "Event", foreign_key: "creator_id", dependent: :destroy
   has_many :event_registrations, foreign_key: "attendee_id", dependent: :destroy
   has_many :attended_events, through: :event_registrations
+  has_many :created_invitations, class_name: 'Invitation', foreign_key: "creator_id", dependent: :destroy
+  has_many :received_invitations, class_name: 'Invitation', foreign_key: "invitee_id", dependent: :destroy
+  has_many :invited_events, through: :received_invitations, source: :event
   
   attr_writer :login
 
