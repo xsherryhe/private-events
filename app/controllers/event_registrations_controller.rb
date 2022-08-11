@@ -4,12 +4,12 @@ class EventRegistrationsController < ApplicationController
   def new
     @event = Event.find(params[:event_id])
     if current_user.attended_events.include?(@event)
-      flash[:page_registration_error] = "You have already registered for this event."
+      flash[:error] = "You have already registered for this event."
       redirect_to @event
-    else
-      @event_registration = current_user.event_registrations
-                                        .build(attended_event_id: @event.id)
     end
+
+    @event_registration = current_user.event_registrations
+                                      .build(attended_event_id: @event.id)
   end
 
   def create
@@ -25,9 +25,51 @@ class EventRegistrationsController < ApplicationController
         render :new, status: :unprocessable_entity
       end
     rescue ActiveRecord::RecordNotUnique
-      @event_registration.errors.add(:base, message: "You have already registered for this event.")
-      render :new, status: :unprocessable_entity
+      flash[:error] = "You have already registered for this event."
+      redirect_to @event, status: :see_other
     end
+  end
+
+  def edit
+    @event = Event.find(params[:event_id])
+    @event_registration = EventRegistration.find_by(attendee_id: current_user.id, 
+                                                    attended_event_id: @event.id)
+    unless @event_registration
+      flash[:error] = "You are not registered for this event."
+      redirect_to @event
+    end
+  end
+
+  def update
+    @event = Event.find(params[:event_id])
+    @event_registration = EventRegistration.find_by(attendee_id: current_user.id, 
+                                                    attended_event_id: @event.id)
+    unless @event_registration
+      flash[:error] = "You are not registered for this event."
+      redirect_to @event
+    end
+
+    if @event_registration.update(event_registration_params)
+      flash[:notice] = "Successfully updated registration for \"#{@event.name}\"!"
+      redirect_to @event
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    @event = Event.find(params[:event_id])
+    @event_registration = EventRegistration.find_by(attendee_id: current_user.id, 
+                                                    attended_event_id: @event.id)
+    unless @event_registration
+      flash[:error] = "You are not registered for this event."
+      redirect_to @event, status: :see_other
+    end
+
+    name = @event.name
+    @event_registration.destroy
+    flash[:notice] = "Successfully unregistered from event \"#{name}\"."
+    redirect_to @event, status: :see_other
   end
 
   private

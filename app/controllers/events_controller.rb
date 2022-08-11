@@ -40,7 +40,7 @@ class EventsController < ApplicationController
       flash[:notice] = "Successfully updated event \"#{@event.name}\"!"
       redirect_to @event
     else
-      render :new, status: :unprocessable_entity
+      render :edit, status: :unprocessable_entity
     end
   end
 
@@ -52,7 +52,7 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
     unless @event.creator == current_user
       flash[:error] = 'You cannot delete this event as you are not the host.'
-      redirect_to @event
+      redirect_to @event, status: :see_other
     end
 
     name = @event.name

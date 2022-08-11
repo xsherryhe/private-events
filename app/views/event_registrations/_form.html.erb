@@ -1,0 +1,12 @@
+<%= form_with model: event_registration, url: form_url do |form| %>
+  <div class="attendee"><strong>Attendee:</strong> <%= event_registration.attendee.username %></div>
+  <div class="attended-event"><strong>Event:</strong> <%= event.name %></div>
+  <div class="field">
+    <%= form.label :notes, 'Notes' %>
+    <%= form.text_area :notes, placeholder: 'Provide any notes, questions, or concerns for the host (e.g., cost, timing, food allergies).' %>
+    <% event_registration.errors.full_messages_for(:notes).each do |message| %>
+      <p class="error"><%= message %></p>
+    <% end %>
+  </div>
+  <%= form.submit submit_text %>
+<% end %>

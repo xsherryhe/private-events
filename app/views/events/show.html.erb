@@ -20,8 +20,15 @@
       <li><%= link_to attendee.username, user_path(attendee) %></li>
     <% end %>
   </ul>
-<%= link_to 'Register for This Event', new_event_registration_path(@event) %>
-<div class="error"><%= flash[:page_registration_error] %></div>
+<% if @event.attendees.include?(current_user) %>
+  <%= link_to 'Edit Registration for This Event', edit_event_registration_path(@event) %>
+  <%= link_to 'Unregister From This Event', 
+              event_registration_path(@event),
+              data: { turbo_confirm: 'Are you sure you wish to unregister from this event?',
+                      turbo_method: :delete } %>
+<% else %>
+  <%= link_to 'Register for This Event', new_event_registration_path(@event) %>
+<% end %>
 <% if @event.creator == current_user %>
   <%= link_to 'Edit This Event', edit_event_path(@event) %>
   <%= link_to 'Delete This Event', 

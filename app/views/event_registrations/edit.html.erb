@@ -1,0 +1,6 @@
+<h2>Edit Registration for "<%= @event.name %>"</h2>
+
+<%= render 'form', event_registration: @event_registration, 
+                   event: @event, 
+                   form_url: event_registration_path(@event), 
+                   submit_text: 'Update Registration' %>
