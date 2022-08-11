@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :users, only: [:show]
   resources :events do
     resources :registrations, except: [:index, :show], controller: 'event_registrations'
+    resources :invitations, only: [:new, :create]
   end
   resources :my_events, only: [:index]
   # Defines the root path route ("/")
