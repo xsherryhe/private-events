@@ -7,7 +7,18 @@ class Invitation < ApplicationRecord
 
   enum :response, [:not_responded, :accepted, :declined], default: :not_responded
 
+  scope :viewed, -> { where('viewed_at <= ?', DateTime.current) }
+  scope :not_viewed, -> { where(viewed_at: nil).or(where('viewed_at > ?', DateTime.current)) }
+
   attr_accessor :invitee_username
+
+  def viewed?
+    viewed_at && viewed_at <= DateTime.current
+  end
+
+  def viewed!
+    update(viewed_at: DateTime.current)
+  end
 
   private
 

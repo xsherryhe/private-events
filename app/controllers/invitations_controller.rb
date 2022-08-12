@@ -34,7 +34,7 @@ class InvitationsController < ApplicationController
 
   def show
     @invitation = Invitation.includes({ invited_event: :creator }, :invitee).find_by(id: params[:id])
-    @invitation.update_viewed_at
+    @invitation.viewed! unless @invitation.viewed?
   end
 
   def update

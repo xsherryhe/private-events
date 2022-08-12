@@ -3,8 +3,10 @@
 <% @invitations.each do |invitation| %>
   <div class="invitation">
     <div class="invitation-link">
-      <%= link_to "Invitation to Event \"#{invitation.invited_event.name}\"",
-                   [invitation.invited_event, invitation] %>
+      <%= strong_unless_viewed invitation do %>
+        <%= link_to "Invitation to Event \"#{invitation.invited_event.name}\"",
+                    [invitation.invited_event, invitation] %>
+      <% end %>
     </div>
     <div class="invitation-creator">
       <strong>From:</strong> <%= link_to invitation.invited_event.creator.username, user_path(invitation.invited_event.creator) %>

@@ -42,10 +42,10 @@ Invitations function
   --With links for "View Invitation" to invitation#show
   --Also a separate page for invitations (invitations#index), with links to invitation#show
   --Invitation#show will have notes and links to Accept (Register for Event) or Decline Invitation
-  -Parentheses for how many new invitations
-  -Persistent message in header for new invitations until user navigates to invitation#show page -- place in layout in same place as the edit account/sign out options
-  -Need a column for viewed_at which updates with invitation#show action
-  -New vs old invitations can be scoped from Invitation model using viewed_at option, bolded vs not bolded
+  --Parentheses for how many new invitations
+  --Need a column for viewed_at which updates with invitation#show action
+  --New vs old invitations can be scoped from Invitation model using viewed_at option
+    --Bolded vs not bolded
   --Need a response enum
     --Responded invitations are still shown and response can be updated until they are deleted
     --But the invitation text will indicate registered, declined, or not responded
