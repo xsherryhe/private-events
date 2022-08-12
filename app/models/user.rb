@@ -17,6 +17,11 @@ class User < ApplicationRecord
   has_many :created_invitations, through: :created_events, source: :invitations
   has_many :received_invitations, class_name: 'Invitation', foreign_key: "invitee_id", dependent: :destroy
   has_many :invited_events, through: :received_invitations
+
+  scope :not_responded_invitation, (lambda do |invited_event|
+    joins(:received_invitations).where(received_invitations: { invited_event_id: invited_event.id, 
+                                       response: :not_responded })
+  end)
   
   attr_writer :login
 

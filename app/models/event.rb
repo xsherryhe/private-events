@@ -17,4 +17,9 @@ class Event < ApplicationRecord
     where('happening_date < ?', Date.current)
    .or(where(happening_date: Date.current).where('happening_time < ?', Time.current))
   end)
+
+  scope :not_responded_invitation, (lambda do |invitee|
+    joins(:invitations).where(invitations: { invitee_id: invitee.id, 
+                                             response: :not_responded })
+  end)
 end

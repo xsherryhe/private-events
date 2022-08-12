@@ -44,6 +44,6 @@ Invitations function
   -Persistent message in header for new invitations until user navigates to invitation#show page -- place in layout in same place as the edit account/sign out options
   -Need a column for viewed_at which updates with invitation#show action
   -New vs old invitations can be scoped from Invitation model using viewed_at option, bolded vs not bolded
-  -Need a true/false/null column for attending_response
+  -Need a response enum
     -Responded invitations are still shown until they are deleted
     -But the invitation text will indicate registered, declined, or not responded

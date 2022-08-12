@@ -1,9 +1,11 @@
 class Invitation < ApplicationRecord
   belongs_to :invited_event, class_name: 'Event'
   belongs_to :invitee, class_name: 'User', optional: true
-  before_validation :set_invitee
-  validates :invitee_username, presence: true
-  validate :valid_invitee, unless: -> { invitee_username.blank? }
+  before_validation :set_invitee, on: :create
+  validates :invitee_username, presence: true, on: :create
+  validate :valid_invitee, unless: -> { invitee_username.blank? }, on: :create
+
+  enum :response, [:not_responded, :accepted, :declined], default: :not_responded
 
   attr_accessor :invitee_username
 
