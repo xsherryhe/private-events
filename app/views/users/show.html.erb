@@ -13,8 +13,11 @@
 
 <%= render "shared/events_list", 
             events: @user.created_events, 
-            list_name: "#{@user.username}'s Created Events", 
+            list_name: "#{@user.username}'s Hosted Events", 
             curr_user: @curr_user %>
+<% if @user == @curr_user %>
+  <strong><%= link_to 'Host A New Event', new_event_path, class: 'new-event-link' %></strong>
+<% end %>
 <%= render "shared/events_list", 
             events: @attended_events.future, 
             list_name: "#{@user.username}'s Upcoming Events to Attend", 
