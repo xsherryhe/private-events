@@ -1,3 +1,8 @@
+<% if User.not_responded_invitation(event).include?(curr_user) %>
+  <% invitation = event.invitations.find_by(invitee_id: curr_user.id) %>
+  <%= link_to 'View Invitation', event_invitation_path(event, invitation) %>
+<% end %>
+
 <% if event.attendees.include?(curr_user) %>
   <% event_registration = event.event_registrations.find_by(attendee_id: curr_user.id) %>
   <%= link_to 'Edit Registration for This Event', edit_event_registration_path(event, event_registration) %>

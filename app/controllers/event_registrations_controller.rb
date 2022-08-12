@@ -66,9 +66,8 @@ class EventRegistrationsController < ApplicationController
       redirect_to @event, status: :see_other
     end
 
-    name = @event.name
     @event_registration.destroy
-    flash[:notice] = "Successfully unregistered from event \"#{name}\"."
+    flash[:notice] = "Successfully unregistered from event \"#{@event.name}\"."
     redirect_to @event, status: :see_other
   end
 

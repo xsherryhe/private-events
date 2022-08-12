@@ -39,13 +39,13 @@ Invitations function
   --Host types invited user's username
   --Host will see an "invited" and "declined" list in the event#show with invited users who have not accepted
 --User will see invited events on their own events page for not responded events
-  -With links for "View Invitation" to invitation#show
-  -Also a separate page for invitations (invitations#index), with links to invitation#show
-  -Invitation#show will have notes and links to Accept (Register for Event) or Decline Invitation
+  --With links for "View Invitation" to invitation#show
+  --Also a separate page for invitations (invitations#index), with links to invitation#show
+  --Invitation#show will have notes and links to Accept (Register for Event) or Decline Invitation
   -Parentheses for how many new invitations
   -Persistent message in header for new invitations until user navigates to invitation#show page -- place in layout in same place as the edit account/sign out options
   -Need a column for viewed_at which updates with invitation#show action
   -New vs old invitations can be scoped from Invitation model using viewed_at option, bolded vs not bolded
   --Need a response enum
-    -Responded invitations are still shown and response can be updated until they are deleted
-    -But the invitation text will indicate registered, declined, or not responded
+    --Responded invitations are still shown and response can be updated until they are deleted
+    --But the invitation text will indicate registered, declined, or not responded
