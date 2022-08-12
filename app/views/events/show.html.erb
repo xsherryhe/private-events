@@ -22,11 +22,22 @@
   </ul>
 
 <% if current_user == @creator %>
-  <h4>Invited:</h4>
+  <% unless (not_responded = User.not_responded_invitation(@event)).empty? %>
+    <h4>Invited:</h4>
     <ul>
-      <% @event.invitees.where.not(id: @attendees).each do |invitee| %>
+      <% not_responded.each do |invitee| %>
         <li><%= link_to invitee.username, user_path(invitee) %></li>
       <% end %>
     </ul>
+  <% end %>
+
+  <% unless (declined = User.declined_invitation(@event)).empty? %>
+    <h4>Declined:</h4>
+    <ul>
+      <% User.declined_invitation(@event).each do |invitee| %>
+        <li><%= link_to invitee.username, user_path(invitee) %></li>
+      <% end %>
+    </ul>
+  <% end %>
 <% end %>
 <%= render 'shared/event_links', event: @event, curr_user: current_user %>

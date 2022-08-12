@@ -18,10 +18,16 @@ class User < ApplicationRecord
   has_many :received_invitations, class_name: 'Invitation', foreign_key: "invitee_id", dependent: :destroy
   has_many :invited_events, through: :received_invitations
 
-  scope :not_responded_invitation, (lambda do |invited_event|
+  scope :invitation_response, (lambda do |invited_event, response|
     joins(:received_invitations).where(received_invitations: { invited_event_id: invited_event.id, 
-                                       response: :not_responded })
+                                       response: response })
   end)
+
+  scope :not_responded_invitation, 
+        ->(invited_event) { invitation_response(invited_event, :not_responded) }
+
+  scope :declined_invitation,
+        ->(invited_event) { invitation_response(invited_event, :declined) }
   
   attr_writer :login
 

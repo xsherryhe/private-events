@@ -28,6 +28,8 @@ has_many :invitations
 
 Invitation
 -notes
+-viewed_at
+-response enum
 belongs_to :creator, class_name: User
 belongs_to :invitee, class_name: User
 belongs_to :event
@@ -35,15 +37,15 @@ belongs_to :event
 Invitations function
 --Host can send invite from event links
   --Host types invited user's username
-  --Host will see an "invited" list in the event#show with invited users who have not accepted
--User will see invited events on their own events page,
-  with links for "View Invitation" to invitation#show
+  --Host will see an "invited" and "declined" list in the event#show with invited users who have not accepted
+--User will see invited events on their own events page for not responded events
+  -With links for "View Invitation" to invitation#show
   -Also a separate page for invitations (invitations#index), with links to invitation#show
-  -Invitation#show will have notes and links to Register for Event or Decline Invitation
+  -Invitation#show will have notes and links to Accept (Register for Event) or Decline Invitation
   -Parentheses for how many new invitations
   -Persistent message in header for new invitations until user navigates to invitation#show page -- place in layout in same place as the edit account/sign out options
   -Need a column for viewed_at which updates with invitation#show action
   -New vs old invitations can be scoped from Invitation model using viewed_at option, bolded vs not bolded
-  -Need a response enum
-    -Responded invitations are still shown until they are deleted
+  --Need a response enum
+    -Responded invitations are still shown and response can be updated until they are deleted
     -But the invitation text will indicate registered, declined, or not responded
