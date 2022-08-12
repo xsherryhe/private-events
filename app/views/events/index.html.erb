@@ -1,3 +1,15 @@
+<h1>Welcome to Events Central!</h1>
+
+<% if @events.empty? %>
+  <div class="no-events">
+    <p>No events to show!</p>
+
+    <% if user_signed_in? %>
+      <p>Maybe you can help us by <%= link_to 'hosting an event', new_event_path %>?</p>
+    <% end %>
+  </div>
+<% end %>
+
 <%= render "shared/events_list", 
             events: @events.future, 
             list_name: 'Upcoming Events', 

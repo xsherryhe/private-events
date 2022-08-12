@@ -1,3 +1,16 @@
+<h1><%= @user.username %>'s Events</h1>
+
+<% if @user.created_events.empty? && @user.invited_events.empty? && @attended_events.empty? %>
+  <div class="no-events">
+    <p>No events to show!</p>
+
+    <% if @user == @curr_user %>
+      <p>Start by <%= link_to 'finding an event to attend', events_path %>.</p>
+      <p>Or, <%= link_to 'host your own event', new_event_path %>!</p>
+    <% end %>
+  </div>
+<% end %>
+
 <%= render "shared/events_list", 
             events: @user.created_events, 
             list_name: "#{@user.username}'s Created Events", 

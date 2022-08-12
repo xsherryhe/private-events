@@ -1,4 +1,10 @@
-<h2>My Invitations</h2>
+<h1>My Invitations</h1>
+
+<% if @invitations.empty? %>
+  <div class="no-invitations">
+    <p>No invitations to show!</p>
+  </div>
+<% end %>
 
 <% @invitations.each do |invitation| %>
   <div class="invitation">
