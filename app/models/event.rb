@@ -2,10 +2,10 @@ class Event < ApplicationRecord
   include StringParser
   before_validation :build_invitations
   validates :name, presence: true
-  belongs_to :creator, class_name: "User"
-  has_many :event_registrations, foreign_key: "attended_event_id", dependent: :destroy
+  belongs_to :creator, class_name: 'User'
+  has_many :event_registrations, foreign_key: 'attended_event_id', dependent: :destroy
   has_many :attendees, through: :event_registrations
-  has_many :invitations, foreign_key: "invited_event_id", dependent: :destroy
+  has_many :invitations, foreign_key: 'invited_event_id', dependent: :destroy
   has_many :invitees, through: :invitations
 
   enum :privacy_status, [:public_event, :private_event], default: :public_event

@@ -11,5 +11,5 @@ Rails.application.routes.draw do
   resources :invitations, only: [:index]
   # Defines the root path route ("/")
   # root "articles#index"
-  root "events#index"
+  root 'events#index'
 end

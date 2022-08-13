@@ -4,12 +4,12 @@ class EventRegistrationsController < ApplicationController
   def new
     @event = Event.find(params[:event_id])
     unless @event.full_access?(current_user)
-      flash[:error] = "You cannot register for this event as it is private."
+      flash[:error] = 'You cannot register for this event as it is private.'
       redirect_to @event
     end
 
     if current_user.attended_events.include?(@event)
-      flash[:error] = "You have already registered for this event."
+      flash[:error] = 'You have already registered for this event.'
       redirect_to @event
     end
 
@@ -20,7 +20,7 @@ class EventRegistrationsController < ApplicationController
   def create
     @event = Event.find(params[:event_id])
     unless @event.full_access?(current_user)
-      flash[:error] = "You cannot register for this event as it is private."
+      flash[:error] = 'You cannot register for this event as it is private.'
       redirect_to @event
     end
 
@@ -35,7 +35,7 @@ class EventRegistrationsController < ApplicationController
         render :new, status: :unprocessable_entity
       end
     rescue ActiveRecord::RecordNotUnique
-      flash[:error] = "You have already registered for this event."
+      flash[:error] = 'You have already registered for this event.'
       redirect_to @event, status: :see_other
     end
   end
@@ -45,7 +45,7 @@ class EventRegistrationsController < ApplicationController
     @event_registration = EventRegistration.find_by(attendee_id: current_user.id, 
                                                     attended_event_id: @event.id)
     unless @event_registration
-      flash[:error] = "You are not registered for this event."
+      flash[:error] = 'You are not registered for this event.'
       redirect_to @event
     end
   end
@@ -55,7 +55,7 @@ class EventRegistrationsController < ApplicationController
     @event_registration = EventRegistration.find_by(attendee_id: current_user.id, 
                                                     attended_event_id: @event.id)
     unless @event_registration
-      flash[:error] = "You are not registered for this event."
+      flash[:error] = 'You are not registered for this event.'
       redirect_to @event
     end
 
@@ -72,7 +72,7 @@ class EventRegistrationsController < ApplicationController
     @event_registration = EventRegistration.find_by(attendee_id: current_user.id, 
                                                     attended_event_id: @event.id)
     unless @event_registration
-      flash[:error] = "You are not registered for this event."
+      flash[:error] = 'You are not registered for this event.'
       redirect_to @event, status: :see_other
     end
 

@@ -58,7 +58,7 @@ class InvitationsController < ApplicationController
     if @invitation.update(invitation_params)
       render :show, status: :see_other
     else
-      flash[:error] = "Sorry, we ran into an error."
+      flash[:error] = 'Sorry, we ran into an error.'
       render :show, status: :unprocessable_entity
     end
   end

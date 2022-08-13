@@ -2,8 +2,8 @@
 <% unless %w(happening_date happening_time).all? { |attribute| event[attribute].blank? } %>
   <h4 class="event-date-time">
     When: 
-    <%= [event.happening_date&.strftime("%B %-d, %Y"), 
-         event.happening_time&.strftime("%-I:%M %p")]
+    <%= [event.happening_date&.strftime('%B %-d, %Y'), 
+         event.happening_time&.strftime('%-I:%M %p')]
         .compact.join(' at ') %>
   </h4>
 <% end %>
