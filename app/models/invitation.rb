@@ -1,5 +1,5 @@
 class Invitation < ApplicationRecord
-  belongs_to :invited_event, class_name: 'Event'
+  belongs_to :invited_event, class_name: 'Event', optional: true
   belongs_to :invitee, class_name: 'User', optional: true
   before_validation :set_invitee, on: :create
   validates :invitee_username, presence: true, on: :create
@@ -28,9 +28,9 @@ class Invitation < ApplicationRecord
 
   def valid_invitee
     return errors.add(:invitee, "#{invitee_username} does not exist") unless invitee
-    if invited_event.attendees.include?(invitee)
+    if invited_event&.attendees&.include?(invitee)
       errors.add(:invitee, "#{invitee_username} has already registered for this event")
-    elsif invited_event.invitees.include?(invitee)
+    elsif invited_event&.invitees&.include?(invitee)
       errors.add(:invitee, "#{invitee_username} has already been invited")
     end
   end

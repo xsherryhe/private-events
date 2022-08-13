@@ -18,6 +18,7 @@ class EventsController < ApplicationController
       flash[:notice] = "Successfully created event \"#{@event.name}\"!"
       redirect_to current_user
     else
+      set_valid_invitee_usernames
       render :new, status: :unprocessable_entity
     end
   end
@@ -37,10 +38,18 @@ class EventsController < ApplicationController
       redirect_to @event
     end
 
-    if @event.update(event_params)
-      flash[:notice] = "Successfully updated event \"#{@event.name}\"!"
-      redirect_to @event
-    else
+    begin
+      if @event.update(event_params)
+        flash[:notice] = "Successfully updated event \"#{@event.name}\"!"
+        redirect_to @event
+      else
+        set_valid_invitee_usernames
+        render :edit, status: :unprocessable_entity
+      end
+    rescue ActiveRecord::RecordNotUnique
+      @event.invitations.select { |invitation| invitation.new_record? && Invitation.find_by(invited_event: @event, invitee: invitation.invitee) }
+                        .each { |invitation| invitation.errors.add(:invitee, "#{invitation.invitee_username} has already been invited") }
+      set_valid_invitee_usernames
       render :edit, status: :unprocessable_entity
     end
   end
@@ -72,6 +81,13 @@ class EventsController < ApplicationController
                                   :happening_time,
                                   :location,
                                   :privacy_status,
+                                  :invitee_usernames,
                                   :description)
+  end
+
+  def set_valid_invitee_usernames
+    @invitee_usernames = @event.invitations
+                               .select { |invitation| invitation.new_record? && invitation.errors.none? }
+                               .map(&:invitee_username).join(', ')
   end
 end

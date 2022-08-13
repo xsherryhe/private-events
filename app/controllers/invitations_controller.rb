@@ -1,4 +1,5 @@
 class InvitationsController < ApplicationController
+  include StringParser
   before_action :authenticate_user!
 
   def new
@@ -8,14 +9,14 @@ class InvitationsController < ApplicationController
       redirect_to @event
     end
 
-    @invitee_usernames = ''
     @invitations = []
     @sample_invitation = @event.invitations.build
   end
 
   def create
     @event = Event.find(params[:event_id])
-    @invitations = helpers.parse_list(invitee_usernames).map do |invitee_username|
+    invitee_usernames_arr = parse_list(invitee_usernames_param)
+    @invitations = (invitee_usernames_arr.empty? ? [''] : invitee_usernames_arr).map do |invitee_username|
       @event.invitations.build(invitation_params.merge(invitee_username: invitee_username))
     end
     @sample_invitation = @invitations.first
@@ -82,7 +83,7 @@ class InvitationsController < ApplicationController
     params.require(:invitation).permit(:notes, :response)
   end
 
-  def invitee_usernames
+  def invitee_usernames_param
     params.require(:invitations).permit(:invitee_usernames)['invitee_usernames']
   end
 

@@ -5,7 +5,7 @@
   <div class="field">
     <strong><%= label_tag 'invitations[invitee_usernames]', "Usernames of invited users:" %></strong>
     <p>(Separate each username with a comma)</p>
-    <%= text_area_tag 'invitations[invitee_usernames]', @invitee_usernames %>
+    <%= text_area_tag 'invitations[invitee_usernames]', @invitee_usernames, placeholder: 'user1, user2, user3,...' %>
     <% @invitations.each do |invitation| %>
       <% invitation.errors.full_messages_for(:invitee_username).each do |message| %>
         <p class="error"><%= message %></p>
