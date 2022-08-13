@@ -6,6 +6,8 @@ class Event < ApplicationRecord
   has_many :invitations, foreign_key: "invited_event_id", dependent: :destroy
   has_many :invitees, through: :invitations
 
+  enum :privacy_status, [:public_event, :private_event], default: :public_event
+
   scope :future, (lambda do
     where('happening_date > ?', Date.current)
    .or(where(happening_date: Date.current).where('happening_time >= ?', Time.current))
@@ -22,4 +24,10 @@ class Event < ApplicationRecord
     joins(:invitations).where(invitations: { invitee_id: invitee.id, 
                                              response: :not_responded })
   end)
+
+  def full_access?(user)
+    public_event? ||
+      creator == user ||
+      (attendees + invitees).include?(user)
+  end
 end

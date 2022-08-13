@@ -1,0 +1,43 @@
+<h4 class="event-creator">Hosted by: <%= link_to creator.username, user_path(creator) %></h4>
+<% unless %w(happening_date happening_time).all? { |attribute| event[attribute].blank? } %>
+  <h4 class="event-date-time">
+    When: 
+    <%= [event.happening_date&.strftime("%B %-d, %Y"), 
+         event.happening_time&.strftime("%-I:%M %p")]
+        .compact.join(' at ') %>
+  </h4>
+<% end %>
+<% unless event.location.blank? %>
+  <h4 class="event-location">Where: <%= event.location %></h4>
+<% end %>
+<% unless event.description.blank? %>
+  <p class="event-description"><strong>Details:</strong> <%= event.description %></p>
+<% end %>
+<p class="event-privacy-status"><strong>This event is:</strong> <%= Event.human_attribute_name(@event.privacy_status) %></p>
+<h4>Attendees:</h4>
+  <ul>
+    <% attendees.each do |attendee| %>
+      <li><%= link_to attendee.username, user_path(attendee) %></li>
+    <% end %>
+  </ul>
+
+<% if current_user == creator %>
+  <% unless (not_responded = User.not_responded_invitation(event)).empty? %>
+    <h4>Invited:</h4>
+    <ul>
+      <% not_responded.each do |invitee| %>
+        <li><%= link_to invitee.username, user_path(invitee) %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <% unless (declined = User.declined_invitation(event)).empty? %>
+    <h4>Declined:</h4>
+    <ul>
+      <% User.declined_invitation(event).each do |invitee| %>
+        <li><%= link_to invitee.username, user_path(invitee) %></li>
+      <% end %>
+    </ul>
+  <% end %>
+<% end %>
+<%= render 'shared/event_links', event: event, curr_user: current_user %>

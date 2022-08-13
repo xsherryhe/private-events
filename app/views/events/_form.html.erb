@@ -39,6 +39,17 @@
   </div>
 
   <div class="field">
+    This event is:
+    <% Event.privacy_statuses.keys.each do |status| %>
+      <%= form.radio_button :privacy_status, status %>
+      <%= form.label "privacy_status_#{status}", Event.human_attribute_name(status) %>
+    <% end %>
+    <% event.errors.full_messages_for(:privacy_status).each do |message| %>
+      <p class="error"><%= message %></p>
+    <% end %>
+  </div>
+
+  <div class="field">
     <%= form.label :description, 'Provide a brief description of your event:' %>
     <%= form.text_area :description %>
     <% event.errors.full_messages_for(:description).each do |message| %>

@@ -36,6 +36,8 @@ en:
       event:
         happening_date: "Event date"
         happening_time: "Event time"
+        public_event: "Public"
+        private_event: "Private"
       invitation:
         invitee_username: "Username of invited user"
         invitee: "User"

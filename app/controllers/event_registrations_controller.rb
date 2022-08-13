@@ -3,6 +3,11 @@ class EventRegistrationsController < ApplicationController
 
   def new
     @event = Event.find(params[:event_id])
+    unless @event.full_access?(current_user)
+      flash[:error] = "You cannot register for this event as it is private."
+      redirect_to @event
+    end
+
     if current_user.attended_events.include?(@event)
       flash[:error] = "You have already registered for this event."
       redirect_to @event
@@ -14,6 +19,11 @@ class EventRegistrationsController < ApplicationController
 
   def create
     @event = Event.find(params[:event_id])
+    unless @event.full_access?(current_user)
+      flash[:error] = "You cannot register for this event as it is private."
+      redirect_to @event
+    end
+
     @event_registration = current_user.event_registrations
                                       .build(event_registration_params
                                              .merge(attended_event_id: @event.id))
