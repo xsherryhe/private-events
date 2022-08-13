@@ -11,4 +11,8 @@ module ApplicationHelper
     count = current_user&.received_invitations&.not_viewed&.count
     count && count > 0 ? "(#{count} New)" : false
   end
+
+  def parse_list(list)
+    list.empty? ? [''] : list.split(/, */)
+  end
 end

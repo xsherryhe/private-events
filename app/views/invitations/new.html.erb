@@ -1,20 +1,34 @@
 <h2>Invite a User to Event "<%= @event.name %>"</h2>
 
-<%= form_with model: [@event, @invitation] do |form| %>
+<%= form_with model: [@event, @sample_invitation] do |form| %>
   <div class="invited-event"><strong>Event:</strong> <%= @event.name %></div>
   <div class="field">
-    <strong><%= form.label :invitee_username, "Username of invited user:" %></strong>
-    <%= form.text_field :invitee_username %>
-    <% %i(invitee_username invitee).each do |attribute| %>
-      <% @invitation.errors.full_messages_for(attribute).each do |message| %>
+    <strong><%= label_tag 'invitations[invitee_usernames]', "Usernames of invited users:" %></strong>
+    <p>(Separate each username with a comma)</p>
+    <%= text_area_tag 'invitations[invitee_usernames]', @invitee_usernames %>
+    <% @invitations.each do |invitation| %>
+      <% invitation.errors.full_messages_for(:invitee_username).each do |message| %>
         <p class="error"><%= message %></p>
+      <% end %>
+    <% end %>
+    <% if @invitations.any? { |invitation| invitation.errors[:invitee].any? } %>
+      <p>Removed the following users from invite list:</p>
+      <ul>
+        <% @invitations.each do |invitation| %>
+          <% invitation.errors.full_messages_for(:invitee).each do |message| %>
+            <li class="error"><%= message %></li>
+          <% end %>
+        <% end %>
+      </ul>
+      <% if @invitations.any? { |invitation| invitation.errors[:invitee].none? }%>
+        <p>Click "Invite" again to invite the remaining users on your invite list.</p>
       <% end %>
     <% end %>
   </div>
   <div class="field">
     <%= form.label :notes, 'Notes' %>
     <%= form.text_area :notes, placeholder: 'Provide any notes or questions for the invited user (e.g., cost, timing, food allergies).' %>
-    <% @invitation.errors.full_messages_for(:notes).each do |message| %>
+    <% @sample_invitation.errors.full_messages_for(:notes).each do |message| %>
       <p class="error"><%= message %></p>
     <% end %>
   </div>

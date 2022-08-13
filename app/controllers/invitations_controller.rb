@@ -8,23 +8,31 @@ class InvitationsController < ApplicationController
       redirect_to @event
     end
 
-    @invitation = @event.invitations.build
+    @invitee_usernames = ''
+    @invitations = []
+    @sample_invitation = @event.invitations.build
   end
 
   def create
     @event = Event.find(params[:event_id])
-    @invitation = @event.invitations.build(invitation_params)
+    @invitations = helpers.parse_list(invitee_usernames).map do |invitee_username|
+      @event.invitations.build(invitation_params.merge(invitee_username: invitee_username))
+    end
+    @sample_invitation = @invitations.first
 
     begin
-      if @invitation.save
-        flash[:notice] = "Successfully sent invite for event \"#{@event.name}\" to #{@invitation.invitee.username}!"
+      if @invitations.map(&:save).all?
+        flash[:notice] = "Successfully sent invite#{@invitations.size == 1 ? '' : 's'} for event \"#{@event.name}\"!"
         redirect_to @event
       else
+        rollback_create
         render :new, status: :unprocessable_entity
       end
     rescue ActiveRecord::RecordNotUnique
-      flash[:error] = "User #{@invitation.invitee.username} has already been invited to this event."
-      redirect_to @event, status: :see_other
+      rollback_create
+      @invitations.select { |invitation| Invitation.find_by(invited_event: @event, invitee: invitation.invitee) }
+                  .each { |invitation| invitation.errors.add(:invitee, "#{invitation.invitee_username} has already been invited") }
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -71,6 +79,19 @@ class InvitationsController < ApplicationController
   private
 
   def invitation_params
-    params.require(:invitation).permit(:invitee_username, :notes, :response)
+    params.require(:invitation).permit(:notes, :response)
+  end
+
+  def invitee_usernames
+    params.require(:invitations).permit(:invitee_usernames)['invitee_usernames']
+  end
+
+  def rollback_create
+    invitee_usernames_arr = []
+    @invitations.select(&:persisted?).each do |invitation| 
+      invitee_usernames_arr << invitation.invitee_username
+      invitation.destroy
+    end
+    @invitee_usernames = invitee_usernames_arr.join(', ')
   end
 end
