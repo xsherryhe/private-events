@@ -30,7 +30,9 @@
       <%= link_to 'Home', '/' %>
       <%= link_to 'Host A New Event', new_event_path %>
       <%= link_to 'My Events', my_events_path %>
-      <%= link_to "My Invitations #{new_invitations_display}", invitations_path %>
+      <%= strong_if_condition local_new_invitations_string = new_invitations_string do %>
+        <%= link_to "My Invitations #{local_new_invitations_string || ''}", invitations_path %>
+      <% end %>
     </div>
 
     <div class="flash">
