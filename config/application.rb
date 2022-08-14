@@ -18,6 +18,7 @@ module PrivateEvents
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
-    config.autoload_paths << config.root.join('lib/assets')
+    config.autoload_paths << config.root.join('lib', 'assets')
+    config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
   end
 end

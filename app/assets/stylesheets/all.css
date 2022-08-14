@@ -1,0 +1,55 @@
+@font-face {
+  font-family: 'primary-font';
+  src: url('Inter-VariableFont_slnt,wght.ttf') format('truetype-variations');
+  font-weight: 1 999;
+}
+
+:root {
+  --light-orange: rgb(255, 207, 118);
+  --dark-orange: rgb(255, 89, 0);
+  --purple: rgb(85, 0, 128);
+  --secondary-color: rgb(0, 96, 99);
+  --tertiary-color: rgb(0, 59, 61);
+  --font-color: rgb(59, 59, 59);
+  --off-white-color: rgb(225, 254, 255);
+  --site-font: 'primary-font';
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--site-font);
+  font-size: 1rem;
+  color: var(--font-color);
+}
+
+.important-link {
+  font-weight: 700;
+}
+
+.view {
+  margin: auto;
+}
+
+h2, h3, h4, h5, p {
+  margin: 0;
+}
+
+h2 {
+  font-size: 1.8rem;
+}
+
+a {
+  color: var(--secondary-color);
+  text-decoration: none;
+}
+
+.back-link {
+  font-size: 0.85rem;
+}
+
+.field-with-errors {
+  display: inline;
+}

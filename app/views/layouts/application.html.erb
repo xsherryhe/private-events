@@ -11,38 +11,43 @@
   </head>
 
   <body>
-    <% unless devise_controller? %>
-      <div class="user-info">
-        <% if user_signed_in? %>
-          <div>Currently signed in as: <%= current_user.username %></div>
+    <header>
+      <div class="navigation">
+        <div class="nav-link"><%= link_to 'Home', '/' %></div>
+        <div class="nav-link"><%= link_to 'Create An Event', new_event_path %></div>
+        <div class="nav-link"><%= link_to 'My Events', my_events_path %></div>
+        <div class="nav-link">
+          <%= link_to raw("My Invitations #{local_new_invitations_string = new_invitations_string || ''}"),
+                      invitations_path,
+                      class: local_new_invitations_string.empty? ? nil : 'important-link' %>
+        </div>
+      </div>
+      <% if user_signed_in? %>
+        <div class="auth">
+          <div>Currently signed in as: <%= link_to current_user.username, current_user, class: "important-link" %></div>
           <div class="user-links">
-            <div><%= link_to 'Edit Account', edit_user_registration_path %></div>
-            <div><%= link_to 'Sign Out', destroy_user_session_path, data: { turbo_method: :delete } %></div>
+            <div class="user-link"><%= link_to 'Edit Account', edit_user_registration_path %></div>
+            <div class="user-link"><%= link_to 'Sign Out', destroy_user_session_path, data: { turbo_method: :delete } %></div>
           </div>
-        <% else %>
-          <div>Want to host and attend events? <%= link_to 'Sign Up', new_user_registration_path %></div>
-          <div>Already have an account? <%= link_to 'Sign In', new_user_session_path %></div>
+        </div>
+      <% else %>
+        <div class="no-auth">
+          <div>Want to host and attend events?</div>
+          <div class="user-link"><%= link_to 'Sign Up', new_user_registration_path %></div>
+          <div>Already have an account?</div>
+          <div class="user-link"><%= link_to 'Sign In', new_user_session_path %></div>
+        </div>
+      <% end %>
+    </header>
+    <section class="content">
+      <div class="flash">
+        <% flash.each do |name, message| %>
+          <% unless name.include? 'page' %>
+            <p class="<%= name %>"><%= message %></p>
+          <% end %>
         <% end %>
       </div>
-    <% end %>
-
-    <div class="navigation">
-      <%= link_to 'Home', '/' %>
-      <%= link_to 'Host A New Event', new_event_path %>
-      <%= link_to 'My Events', my_events_path %>
-      <%= strong_if_condition local_new_invitations_string = new_invitations_string do %>
-        <%= link_to "My Invitations #{local_new_invitations_string || ''}", invitations_path %>
-      <% end %>
-    </div>
-
-    <div class="flash">
-      <% flash.each do |name, message| %>
-        <% unless name.include? 'page' %>
-          <p class="<%= name %>"><%= message %></p>
-        <% end %>
-      <% end %>
-    </div>
-
-    <%= yield %>
+      <%= yield %>
+    </section>
   </body>
 </html>
