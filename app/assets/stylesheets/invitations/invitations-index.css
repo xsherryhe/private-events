@@ -1,0 +1,25 @@
+.invitations-index .page-content {
+  padding: 0;
+}
+
+.invitations-index h1 {
+  font-size: 2.5rem;
+}
+
+.invitations-index .page-content > * {
+  padding: 0.8rem var(--horizontal-content-padding);
+}
+
+.invitations-index .invitation-link, 
+.invitations-index .no-invitations {
+  font-size: 1.2rem;
+  margin-bottom: 0.2rem;
+}
+
+.invitations-index .invitation:last-child {
+  border: none;
+}
+
+.invitations-index .invitation:nth-child(even) {
+  background-color: var(--light-font-color);
+}

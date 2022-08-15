@@ -15,10 +15,6 @@
   margin-top: 0.5rem;
 }
 
-.events-list .list-byline a {
-  text-decoration: underline;
-}
-
 .events-list .list-content {
   display: grid;
   grid-template-columns: 1fr;

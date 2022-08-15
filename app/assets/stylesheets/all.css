@@ -15,6 +15,7 @@
   --tertiary-color: rgb(0, 59, 61);
   --font-color: rgb(59, 59, 59);
   --off-white-color: rgb(225, 254, 255);
+  --light-font-color: rgb(230, 230, 230);
   --site-font: 'Inter';
   --heading-font: 'Grandstander';
   --horizontal-content-padding: 10vw;
@@ -81,4 +82,8 @@ h2 {
 a {
   color: var(--secondary-color);
   text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
 }

@@ -7,6 +7,11 @@
   padding: 2rem 3.5rem;
 }
 
+.invitations-show .invitation-name {
+  font-size: 1.5rem;
+  margin-bottom: 0.8rem;
+}
+
 .invitations-show .invitation-option {
   text-decoration: underline;
 }

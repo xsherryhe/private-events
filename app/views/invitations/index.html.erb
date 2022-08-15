@@ -1,4 +1,7 @@
-<h1>My Invitations</h1>
+<% content_for :page_classes do 'invitations invitations-index' end %>
+<% content_for :page_header do %>
+  <h1>My Invitations</h1>
+<% end %>
 
 <% if @invitations.empty? %>
   <div class="no-invitations">
@@ -8,11 +11,10 @@
 
 <% @invitations.each do |invitation| %>
   <div class="invitation">
-    <div class="invitation-name">
-      <%= strong_if_condition !invitation.viewed? do %>
-        <%= link_to "Invitation to Event \"#{invitation.invited_event.name}\"",
-                    [invitation.invited_event, invitation] %>
-      <% end %>
+    <div class="invitation-link">
+      <%= link_to "Invitation to Event “#{invitation.invited_event.name}”",
+                  [invitation.invited_event, invitation],
+                  class: invitation.viewed? ? '' : 'important-link' %>
     </div>
     <div class="invitation-creator">
       <strong>From:</strong> <%= link_to invitation.invited_event.creator.username, user_path(invitation.invited_event.creator) %>
