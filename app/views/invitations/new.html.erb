@@ -12,8 +12,8 @@
       <% end %>
     <% end %>
     <% if @invitations.any? { |invitation| invitation.errors[:invitee].any? } %>
-      <p>Removed the following users from invite list:</p>
-      <ul>
+      <p class="error">Removed the following users from invite list:</p>
+      <ul class="error-list">
         <% @invitations.each do |invitation| %>
           <% invitation.errors.full_messages_for(:invitee).each do |message| %>
             <li class="error"><%= message %></li>
@@ -21,7 +21,7 @@
         <% end %>
       </ul>
       <% if @invitations.any? { |invitation| invitation.errors[:invitee].none? }%>
-        <p>Click "Invite" again to invite the remaining users on your invite list.</p>
+        <p class="error">Click "Invite" again to invite the remaining users on your invite list.</p>
       <% end %>
     <% end %>
   </div>

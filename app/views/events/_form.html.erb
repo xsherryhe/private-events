@@ -64,8 +64,8 @@
       <% end %>
     <% end %>
     <% if event.invitations.any? { |invitation| invitation.errors[:invitee].any? } %>
-      <p>Removed the following users from invite list:</p>
-      <ul>
+      <p class="error">Removed the following users from invite list:</p>
+      <ul class="error-list">
         <% event.invitations.each do |invitation| %>
           <% invitation.errors.full_messages_for(:invitee).each do |message| %>
             <li class="error"><%= message %></li>
@@ -73,7 +73,7 @@
         <% end %>
       </ul>
       <% action = event.new_record? ? 'create' : 'update' %>
-      <p>Click “<%= action.capitalize %> Event” again to <%= action %> your event.</p>
+      <p class="error">Click “<%= action.capitalize %> Event” again to <%= action %> your event.</p>
     <% end %>
   </div>
 
