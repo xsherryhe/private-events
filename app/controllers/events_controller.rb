@@ -15,7 +15,7 @@ class EventsController < ApplicationController
 
     if @event.save
       current_user.attended_events << @event
-      flash[:notice] = "Successfully created event \"#{@event.name}\"!"
+      flash[:notice] = "Successfully created event “#{@event.name}”!"
       redirect_to current_user
     else
       set_valid_invitee_usernames
@@ -40,7 +40,7 @@ class EventsController < ApplicationController
 
     begin
       if @event.update(event_params)
-        flash[:notice] = "Successfully updated event \"#{@event.name}\"!"
+        flash[:notice] = "Successfully updated event “#{@event.name}”!"
         redirect_to @event
       else
         set_valid_invitee_usernames
@@ -69,7 +69,7 @@ class EventsController < ApplicationController
 
     name = @event.name
     @event.destroy
-    flash[:notice] = "Successfully deleted event \"#{name}\"."
+    flash[:notice] = "Successfully deleted event “#{name}”."
     redirect_to current_user, status: :see_other
   end
 

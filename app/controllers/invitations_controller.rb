@@ -23,7 +23,7 @@ class InvitationsController < ApplicationController
 
     begin
       if @invitations.map(&:save).all?
-        flash[:notice] = "Successfully sent invite#{@invitations.size == 1 ? '' : 's'} for event \"#{@event.name}\"!"
+        flash[:notice] = "Successfully sent invite#{@invitations.size == 1 ? '' : 's'} for event “#{@event.name}”!"
         redirect_to @event
       else
         rollback_create
@@ -73,7 +73,7 @@ class InvitationsController < ApplicationController
     end
 
     @invitation.destroy
-    flash[:notice] = "Successfully deleted invitation to \"#{@event.name}\"."
+    flash[:notice] = "Successfully deleted invitation to “#{@event.name}”."
     redirect_to invitations_path, status: :see_other
   end
 
