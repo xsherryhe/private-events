@@ -8,7 +8,7 @@
 
 <% @invitations.each do |invitation| %>
   <div class="invitation">
-    <div class="invitation-link">
+    <div class="invitation-name">
       <%= strong_if_condition !invitation.viewed? do %>
         <%= link_to "Invitation to Event \"#{invitation.invited_event.name}\"",
                     [invitation.invited_event, invitation] %>

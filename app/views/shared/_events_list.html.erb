@@ -13,7 +13,7 @@
             <% if event.full_access?(curr_user) %>
               <div class="event-creator">
                 <h4 class="label">Host:</h4> 
-                <div class="important-link"><%= link_to event.creator.username, user_path(event.creator) %></div>
+                <%= link_to event.creator.username, user_path(event.creator), class: 'important-link' %>
               </div>
           </div>
           <%= render 'shared/event_links', event: event, curr_user: curr_user %>

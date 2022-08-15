@@ -2,7 +2,7 @@
   <div class="event-info">
     <div class="event-creator">
       <h4 class="label">Hosted by:</h4>
-      <div class="important-link"><%= link_to creator.username, user_path(creator) %></div>
+      <%= link_to creator.username, user_path(creator), class: 'important-link' %>
     </div>
     <% unless %w(happening_date happening_time).all? { |attribute| event[attribute].blank? } %>
       <div class="event-date-time">

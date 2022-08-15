@@ -1,43 +1,44 @@
-<h2>Invitation to Event “<%= @invitation.invited_event.name %>”</h2>
-<div class="invitation-event">
-  <strong>Event:</strong> <%= link_to @invitation.invited_event.name, user_path(@invitation.invited_event) %>
-</div>
-<div class="invitation-users">
-  <div class="invitation-creator">
-    <strong>From:</strong> <%= link_to @invitation.invited_event.creator.username, user_path(@invitation.invited_event.creator) %>
+<% content_for :page_classes do 'invitations invitations-show' end %>
+
+<div class="invitation-card">
+  <h4 class="invitation-name">Invitation to Event: “<%= @invitation.invited_event.name %>”</h4>
+  <div class="invitation-details">
+    <div class="invitation-event">
+      <h4 class="label">Event:</h4>
+      <%= link_to @invitation.invited_event.name, user_path(@invitation.invited_event), class: 'important-link' %>
+    </div>
+    <div class="invitation-creator">
+      <h4 class="label">From:</h4>
+      <%= link_to @invitation.invited_event.creator.username, user_path(@invitation.invited_event.creator) %>
+    </div>
+    <div class="invitation-invitee">
+      <h4 class="label">To:</h4>
+      <%= link_to @invitation.invitee.username, user_path(@invitation.invitee) %>
+    </div>
+    <div class="invitation-notes">
+      <h4 class="label">Invitation Notes:</h4>
+      <%= @invitation.notes.blank? ? 'N/A' : @invitation.notes %>
+    </div>
+    <% if @invitation.not_responded? %>
+      <%= link_to 'Accept Invitation (Register for Event)', new_event_registration_path(@invitation.invited_event), class: 'invitation-option' %>
+      <%= link_to 'Decline Invitation',
+                  event_invitation_path([@invitation.invited_event, @invitation], invitation: { response: :declined }),
+                  data: { turbo_method: :patch },
+                  class: 'invitation-option'  %>
+    <% else %>
+      <div class="invitation-response">
+        <h4 class="label">Your Response:</h4>
+        <%= %w(Accepted Declined)[@invitation.read_attribute_before_type_cast(:response) - 1] %>
+      </div>
+      <%= link_to 'Change Your Response',
+                  event_invitation_path([@invitation.invited_event, @invitation], invitation: { response: :not_responded }),
+                  data: { turbo_method: :patch },
+                  class: 'invitation-option'  %>
+    <% end %>
+    <%= link_to 'Delete Invitation',
+                event_invitation_path([@invitation.invited_event, @invitation]),
+                data: { turbo_confirm: 'Are you sure you wish to delete this invitation?',
+                        turbo_method: :delete },
+                class: 'invitation-option' %>
   </div>
-  <div class="invitation-invitee">
-    <strong>To:</strong> <%= link_to @invitation.invitee.username, user_path(@invitation.invitee) %>
-  </div>
-</div>
-
-<div class="invitation-notes">
-  <strong>Invitation Notes:</strong> <%= @invitation.notes.blank? ? 'N/A' : @invitation.notes %>
-</div>
-
-<div class="invitation-response">
-  <% if @invitation.not_responded? %>
-    <div class="invitation-response-links">
-      <%= link_to 'Accept Invitation (Register for Event)', new_event_registration_path(@invitation.invited_event) %>
-      <%= link_to 'Decline Invitation', 
-                  event_invitation_path([@invitation.invited_event, @invitation], invitation: { response: :declined }), 
-                  data: { turbo_method: :patch }  %>
-    </div>
-  <% else %>
-    <div class="current-invitation-response">
-      <strong>Your Response:</strong> <%= %w(Accepted Declined)[@invitation.read_attribute_before_type_cast(:response) - 1] %>
-    </div>
-    <div class="invitation-response-edit-link">
-      <%= link_to 'Change Your Response', 
-                  event_invitation_path([@invitation.invited_event, @invitation], invitation: { response: :not_responded }), 
-                  data: { turbo_method: :patch }  %>
-    </div>
-  <% end %>
-</div>
-
-<div class="delete-invitation-link">
-  <%= link_to 'Delete Invitation', 
-              event_invitation_path([@invitation.invited_event, @invitation]),
-              data: { turbo_confirm: 'Are you sure you wish to delete this invitation?',
-                      turbo_method: :delete } %>
 </div>

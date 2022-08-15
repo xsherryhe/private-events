@@ -1,0 +1,24 @@
+.invitations-show {
+  font-size: 1.2rem;
+}
+
+.invitations-show .invitation-card {
+  border: 10px double var(--secondary-color);
+  padding: 2rem 3.5rem;
+}
+
+.invitations-show .invitation-option {
+  text-decoration: underline;
+}
+
+.invitations-show .invitation-details {
+  display: grid;
+  grid-template: repeat(4, max-content) / repeat(2, max-content);
+  grid-auto-flow: column;
+  justify-content: space-between;
+}
+
+.invitations-show .invitation-response,
+.invitations-show .invitation-option {
+  justify-self: end;
+}
