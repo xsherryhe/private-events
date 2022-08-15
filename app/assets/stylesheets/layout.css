@@ -80,11 +80,7 @@ body > header > * {
   color: var(--font-color);
 }
 
-.content {
-  display: flex;
-  flex-direction: column-reverse;
-}
-
 .flash {
-  padding-top: 0.5rem;
+  padding-top: 1rem;
+  padding-bottom: 0;
 }

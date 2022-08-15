@@ -32,26 +32,21 @@ body {
   line-height: 1.6rem;
 }
 
-.view > *, .flash {
+.content > * {
   padding-left: var(--horizontal-content-padding);
   padding-right: var(--horizontal-content-padding);
 }
 
-.view > header {
-  background-color: var(--font-color);
-  color: white;
+.content > .page-content {
   padding-top: var(--vertical-content-padding);
   padding-bottom: var(--vertical-content-padding);
 }
 
-.view > .page-content {
-  padding-top: var(--vertical-content-padding);
-  padding-bottom: var(--vertical-content-padding);
-}
-
-.view + .flash {
+.page-header-present > .page-header {
   background-color: var(--font-color);
   color: white;
+  padding-top: var(--vertical-content-padding);
+  padding-bottom: var(--vertical-content-padding);
 }
 
 .label {

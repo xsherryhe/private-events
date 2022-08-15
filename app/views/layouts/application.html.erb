@@ -39,8 +39,8 @@
         </div>
       <% end %>
     </header>
-    <div class="content">
-      <div class="view <%= yield :page_classes %>"><%= yield %></div>
+    <section class="content <%= content_for?(:page_header) ? 'page-header-present' : '' %> <%= yield :page_classes %>">
+      <header class="page-header"><%= yield :page_header %></header>
       <% if flash.any?%>
         <div class="flash">
           <% flash.each do |name, message| %>
@@ -50,6 +50,7 @@
           <% end %>
         </div>
       <% end %>
-    </div>
+      <section class="page-content"><%= yield %></section>
+    </section>
   </body>
 </html>
