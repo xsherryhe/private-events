@@ -1,3 +1,6 @@
-<h2>Edit Event "<%= @event.name %>"</h2>
+<% content_for :page_classes do 'events events-form events-edit' end %>
+<% content_for :page_header do %>
+  <h2>Edit Event “<%= @event.name %>”</h2>
+<% end %>
 
 <%= render 'form', event: @event %>

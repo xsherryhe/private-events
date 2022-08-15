@@ -1,6 +1,8 @@
+<% content_for :page_classes do ' form' end %>
 <%= form_with model: event do |form| %>
   <div class="creator">
-    <p>Host: <strong><%= current_user.username %></strong></p>
+    <p class="label">Host:</p> 
+    <strong><%= current_user.username %></strong>
   </div>
 
   <div class="field">
@@ -11,38 +13,41 @@
     <% end %>
   </div>
 
-  <p>Where and when is your event happening?</p>
-
-  <div class="field">
+  <div class="where-when-subset">
+    <p class="label">Where and when is your event happening?</p>
     <%# Not using form.datetime_select due to Rails's wonky placement of the AM/PM marker %>
-    <div class="happening-datetime">
-      <%= form.label :happening_date, 'Date:' %>
-      <%= form.date_field :happening_date %>
-      <div class="happening-time">
+    <div class="where-when-fields">
+      <div class="date inline field">
+        <%= form.label :happening_date, 'Date:' %>
+        <%= form.date_field :happening_date %>
+        <% event.errors.full_messages_for(:happening_date).each do |message| %>
+          <p class="error"><%= message %></p>
+        <% end %>
+      </div>
+      <div class="time inline field">
         <%= form.label :happening_time, 'Time:' %>
         <%= form.time_field :happening_time %>
+        <% event.errors.full_messages_for(:happening_time).each do |message| %>
+          <p class="error"><%= message %></p>
+        <% end %>
+      </div>
+      <div class="location inline field">
+        <%= form.label :location, 'Location:' %> 
+        <%= form.text_field :location %>
+        <% event.errors.full_messages_for(:location).each do |message| %>
+          <p class="error"><%= message %></p>
+        <% end %>
       </div>
     </div>
-    <% %i(happening_date happening_hour happening_minute happening_ampm).each do |attribute| %>
-      <% event.errors.full_messages_for(attribute).each do |message| %>
-        <p class="error"><%= message %></p>
-      <% end %>
-    <% end %>
   </div>
 
   <div class="field">
-    <%= form.label :location, 'Location:' %>
-    <%= form.text_field :location %>
-    <% event.errors.full_messages_for(:location).each do |message| %>
-      <p class="error"><%= message %></p>
-    <% end %>
-  </div>
-
-  <div class="field">
-    This event is:
+    <p class="label">This event is:</p>
     <% Event.privacy_statuses.keys.each do |status| %>
-      <%= form.radio_button :privacy_status, status %>
-      <%= form.label "privacy_status_#{status}", Event.human_attribute_name(status) %>
+      <div class="selection">
+        <%= form.radio_button :privacy_status, status %>
+        <%= form.label "privacy_status_#{status}", Event.human_attribute_name(status) %>
+      </div>
     <% end %>
     <% event.errors.full_messages_for(:privacy_status).each do |message| %>
       <p class="error"><%= message %></p>
@@ -51,7 +56,7 @@
 
   <div class="field">
     <%= form.label :invitee_usernames, 'Invite users to your event (optional):' %>
-    <p>(Separate each username with a comma)</p>
+    <p><em>Separate each username with a comma</em></p>
     <%= form.text_area :invitee_usernames, value: @invitee_usernames, placeholder: 'user 1, user 2, user 3,...' %>
     <% event.invitations.each do |invitation| %>
       <% invitation.errors.full_messages_for(:invitee_username).each do |message| %>
@@ -72,7 +77,7 @@
     <% end %>
   </div>
 
-  <div class="field">
+  <div class="description field">
     <%= form.label :description, 'Provide a brief description of your event:' %>
     <%= form.text_area :description %>
     <% event.errors.full_messages_for(:description).each do |message| %>
@@ -80,5 +85,5 @@
     <% end %>
   </div>
 
-  <%= form.submit %>
+  <div class="submit"><%= form.submit %></div>
 <% end %>

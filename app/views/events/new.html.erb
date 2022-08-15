@@ -1,3 +1,6 @@
-<h2>Create a New Event</h2>
+<% content_for :page_classes do 'events events-form events-new' end %>
+<% content_for :page_header do %>
+  <h2>Create a New Event</h2>
+<% end %>
 
 <%= render 'form', event: @event %>

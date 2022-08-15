@@ -3,3 +3,8 @@
   font-weight: 700;
   text-align: center;
 }
+
+.events-index .page-header {
+  padding-top: 12vh;
+  padding-bottom: 12vh;
+}

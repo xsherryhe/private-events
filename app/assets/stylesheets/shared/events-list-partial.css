@@ -1,3 +1,7 @@
+.events-lists .page-content {
+  padding-top: 0;
+}
+
 .events-list {
   padding-top: var(--vertical-content-padding);
   border-bottom: 2px solid var(--font-color);

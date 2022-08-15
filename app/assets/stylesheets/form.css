@@ -1,0 +1,59 @@
+.form form {
+  display: grid;
+  grid-template-columns: max-content;
+  flex-direction: column;
+  gap: 1.2rem;
+  line-height: 1rem;
+  margin-bottom: var(--vertical-content-padding);
+}
+
+.form .field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.form .inline.field {
+  flex-direction: row;
+  gap: 0.5rem;
+}
+
+.form label {
+  display: block;
+}
+
+.form input,
+.form textarea {
+  padding: 0.1rem 0.3rem;
+  outline: none;
+  color: var(--font-color);
+}
+
+.form input[type='text'],
+.form input[type='date'],
+.form input[type='time'] {
+  height: 1.6rem;
+}
+
+.form input[type='radio'] + label,
+.form input[type='checkbox'] + label {
+  display: inline;
+}
+
+.form textarea {
+  min-height: 3rem;
+}
+
+.form .description textarea, .form .notes textarea {
+  min-height: 6rem;
+}
+
+.submit {
+  display: flex;
+  justify-content: center;
+}
+
+.form input[type='submit'] {
+  padding: 0.4rem 2rem;
+  cursor: pointer;
+}

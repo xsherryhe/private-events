@@ -13,6 +13,8 @@
  *= require normalize.css
  *= require all.css
  *= require layout.css
+ * =require form.css
+ *= require_tree ./shared
  *= require_tree ./events
  *= require_self
  */
