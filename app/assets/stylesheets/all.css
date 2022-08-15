@@ -29,9 +29,10 @@ body {
   font-family: var(--site-font);
   font-size: 1rem;
   color: var(--font-color);
+  line-height: 1.6rem;
 }
 
-.view > * {
+.view > *, .flash {
   padding-left: var(--horizontal-content-padding);
   padding-right: var(--horizontal-content-padding);
 }
@@ -69,12 +70,13 @@ h1 {
   color: white;
 }
 
-h1, h2, h3, h4, h5, p, section {
+h1, h2, h3, h4, h5, ul, p, section {
   margin: 0;
 }
 
 ul {
-  margin: 0 1rem;
+  padding: 0 1.6rem;
+  list-style-type: '⟡ ';
 }
 
 h2 {

@@ -3,7 +3,7 @@
   <h1>Events Central</h1>
 </header>
 
-<div class="page-content">
+<section class="page-content">
   <% if @events.empty? %>
     <div class="no-events">
       <p>No events to show!</p>
@@ -22,4 +22,4 @@
               events: @events.past,
               list_name: 'Past Events',
               curr_user: @curr_user %>
-</div>
+</section>

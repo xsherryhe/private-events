@@ -4,7 +4,9 @@
 }
 
 .event-details .event-info {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.event-details .event-user-info {
+  margin-top: 1rem;
 }

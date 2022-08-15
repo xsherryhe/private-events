@@ -3,3 +3,7 @@
   font-weight: 700;
   text-align: center;
 }
+
+.events-index .page-content {
+  padding-top: 0;
+}

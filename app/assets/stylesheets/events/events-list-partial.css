@@ -1,25 +1,29 @@
-.event-list {
-  padding: 0.6rem 0;
+.events-list {
+  padding-top: var(--vertical-content-padding);
   border-bottom: 2px solid var(--font-color);
 }
 
-.event-list .list-without-heading {
+.events-list .list-name {
+  font-size: 2rem;
+}
+
+.events-list .list-without-heading {
   display: grid;
   grid-template-columns: 1fr;
   grid-auto-rows: 1fr;
 }
 
-.event-list .event {
+.events-list .event {
   padding: 1.2rem 0;
   border-bottom: 1px dotted var(--font-color);
   display: flex;
   justify-content: space-between;
 }
 
-.event-list .event:last-child {
+.events-list:last-child, .events-list .event:last-child {
   border: none;
 }
 
-.event-list .event-name {
-  margin-bottom: 0.5rem;
+.events-list .event-name {
+  margin-bottom: 0.2rem;
 }

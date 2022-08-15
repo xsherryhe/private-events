@@ -2,3 +2,8 @@
   padding-top: var(--vertical-content-padding);
   padding-bottom: var(--vertical-content-padding);
 }
+
+.events-show + .flash {
+  background-color: white;
+  color: var(--font-color);
+}

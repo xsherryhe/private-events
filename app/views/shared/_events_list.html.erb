@@ -1,6 +1,6 @@
 <% unless events.empty? %>
-  <div class="event-list">
-    <h2><%= list_name %></h2>
+  <div class="events-list">
+    <h2 class="list-name"><%= list_name %></h2>
     <div class="list-without-heading">
       <% events.includes(:creator, :attendees).each do |event| %>
         <div class="event">

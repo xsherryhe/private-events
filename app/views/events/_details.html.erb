@@ -23,6 +23,7 @@
         <%= event.description %>
       </div>
     <% end %>
+    <br />
     <div class="event-privacy-status">
       <h4 class="label">This event is:</h4>
       <%= Event.human_attribute_name(@event.privacy_status) %>
@@ -33,7 +34,6 @@
           <li><%= link_to attendee.username, user_path(attendee) %></li>
         <% end %>
       </ul>
-  
     <% if current_user == creator %>
       <% unless (not_responded = User.not_responded_invitation(event)).empty? %>
         <h4 class="label">Invited:</h4>
@@ -43,7 +43,6 @@
           <% end %>
         </ul>
       <% end %>
-  
       <% unless (declined = User.declined_invitation(event)).empty? %>
         <h4 class="label">Declined:</h4>
         <ul>
@@ -53,6 +52,6 @@
         </ul>
       <% end %>
     <% end %>
-  </div>
+      </div>
   <%= render 'shared/event_links', event: event, curr_user: current_user %>
 </div>
