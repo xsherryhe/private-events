@@ -1,4 +1,7 @@
-<h2>Edit Registration for “<%= @event.name %>”</h2>
+<% content_for :page_classes do 'event_registrations event_registrations-edit' end %>
+<% content_for :page_header do %>
+  <h2>Edit Registration for “<%= @event.name %>”</h2>
+<% end %>
 
 <%= render 'form', event_registration: @event_registration, 
                    event: @event, 
