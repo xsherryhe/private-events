@@ -1,0 +1,10 @@
+.event-details {
+  display: flex;
+  justify-content: space-between;
+}
+
+.event-details .event-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}

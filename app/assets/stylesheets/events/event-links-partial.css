@@ -1,0 +1,9 @@
+.event-links {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.event-links a {
+  text-decoration: underline;
+}

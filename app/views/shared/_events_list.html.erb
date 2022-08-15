@@ -5,11 +5,14 @@
       <% events.includes(:creator, :attendees).each do |event| %>
         <div class="event">
           <div class="event-info">
-            <h4 class="event-name"><%= link_to event.name, event %></h4>
+            <h3 class="event-name"><%= link_to event.name, event %></h3>
             <% if event.full_access?(curr_user) %>
-              <h4 class="event-creator">Host: <%= link_to event.creator.username, user_path(event.creator) %></h4>
+              <div class="event-creator">
+                <h4 class="label">Host:</h4> 
+                <div class="important-link"><%= link_to event.creator.username, user_path(event.creator) %></div>
+              </div>
           </div>
-          <div class="event-links"><%= render 'shared/event_links', event: event, curr_user: curr_user %></div>
+          <%= render 'shared/event_links', event: event, curr_user: curr_user %>
             <% else %>
               <p>Private Event</p>
           </div>

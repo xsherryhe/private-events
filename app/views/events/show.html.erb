@@ -1,4 +1,5 @@
-<h4 class="event-name"><%= @event.name %></h4>
+<% content_for :page_classes do 'events events-show' end %>
+<h4 class="event-name">Event: <%= @event.name %></h4>
 <% if @event.full_access?(current_user) %>
   <%= render 'details', event: @event, creator: @creator, attendees: @attendees %>
 <% else %>
