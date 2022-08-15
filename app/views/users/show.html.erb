@@ -1,4 +1,7 @@
-<h1><%= @user.username %>'s Events</h1>
+<% content_for :page_classes do 'users users-show' end %>
+<% content_for :page_header do %>
+  <h1><%= @user.username %>’s Events</h1>
+<% end %>
 
 <% if @user.created_events.empty? && @user.invited_events.empty? && @attended_events.empty? %>
   <div class="no-events">
@@ -13,22 +16,20 @@
 
 <%= render 'shared/events_list', 
             events: @user.created_events, 
-            list_name: "#{@user.username}'s Hosted Events", 
+            list_name: "#{@user.username}’s Hosted Events",
+            list_byline: @user == @curr_user ? (link_to 'Host A New Event', new_event_path) : nil,
             curr_user: @curr_user %>
-<% if @user == @curr_user %>
-  <strong><%= link_to 'Host A New Event', new_event_path, class: 'new-event-link' %></strong>
-<% end %>
 <%= render 'shared/events_list', 
             events: @attended_events.future, 
-            list_name: "#{@user.username}'s Upcoming Events to Attend", 
+            list_name: "#{@user.username}’s Upcoming Events to Attend", 
             curr_user: @curr_user %>
 <% if @user == @curr_user %>
   <%= render 'shared/events_list',
               events: Event.not_responded_invitation(@user),
-              list_name: "#{@user.username}'s Invited Events",
+              list_name: "#{@user.username}’s Invited Events",
               curr_user: @curr_user %>
 <% end %>
 <%= render 'shared/events_list', 
             events: @attended_events.past, 
-            list_name: "#{@user.username}'s Past Attended Events", 
+            list_name: "#{@user.username}’s Past Attended Events", 
             curr_user: @curr_user %>

@@ -16,5 +16,6 @@
  * =require form.css
  *= require_tree ./shared
  *= require_tree ./events
+ *= require_tree ./users
  *= require_self
  */

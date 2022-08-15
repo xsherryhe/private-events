@@ -2,7 +2,10 @@
 <% unless events.empty? %>
   <div class="events-list">
     <h2 class="list-name"><%= list_name %></h2>
-    <div class="list-without-heading">
+    <% if list_byline ||= nil %>
+      <h3 class="list-byline"><%= list_byline %></h3>
+    <% end %>
+    <div class="list-content">
       <% events.includes(:creator, :attendees).each do |event| %>
         <div class="event">
           <div class="event-info">

@@ -11,7 +11,11 @@
   font-size: 2rem;
 }
 
-.events-list .list-without-heading {
+.events-list .list-byline {
+  margin-top: 0.5rem;
+}
+
+.events-list .list-content {
   display: grid;
   grid-template-columns: 1fr;
   grid-auto-rows: 1fr;
