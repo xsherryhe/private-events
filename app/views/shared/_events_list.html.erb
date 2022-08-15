@@ -1,14 +1,21 @@
 <% unless events.empty? %>
-  <h2><%= list_name %></h2>
-  <% events.includes(:creator, :attendees).each do |event| %>
-      <div class="event">
-        <h4 class="event-name"><%= link_to event.name, event %></h4>
-        <% if event.full_access?(curr_user) %>
-          <h4 class="event-creator">Hosted by: <%= link_to event.creator.username, user_path(event.creator) %></h4>
-          <%= render 'shared/event_links', event: event, curr_user: curr_user %>
-        <% else %>
-          <p>Private Event</p>
-        <% end %>
-      </div>
-  <% end %>
+  <div class="event-list">
+    <h2><%= list_name %></h2>
+    <div class="list-without-heading">
+      <% events.includes(:creator, :attendees).each do |event| %>
+        <div class="event">
+          <div class="event-info">
+            <h4 class="event-name"><%= link_to event.name, event %></h4>
+            <% if event.full_access?(curr_user) %>
+              <h4 class="event-creator">Host: <%= link_to event.creator.username, user_path(event.creator) %></h4>
+          </div>
+          <div class="event-links"><%= render 'shared/event_links', event: event, curr_user: curr_user %></div>
+            <% else %>
+              <p>Private Event</p>
+          </div>
+            <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
 <% end %>

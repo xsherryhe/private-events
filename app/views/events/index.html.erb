@@ -1,20 +1,25 @@
-<h1>Events Central</h1>
+<% content_for :page_classes do 'events events-index' end %>
+<header>
+  <h1>Events Central</h1>
+</header>
 
-<% if @events.empty? %>
-  <div class="no-events">
-    <p>No events to show!</p>
-
-    <% if user_signed_in? %>
-      <p>Maybe you can help us by <%= link_to 'hosting an event', new_event_path %>?</p>
-    <% end %>
-  </div>
-<% end %>
-
-<%= render 'shared/events_list', 
-            events: @events.future, 
-            list_name: 'Upcoming Events', 
-            curr_user: @curr_user %>
-<%= render 'shared/events_list', 
-            events: @events.past, 
-            list_name: 'Past Events', 
-            curr_user: @curr_user %>
+<div class="page-content">
+  <% if @events.empty? %>
+    <div class="no-events">
+      <p>No events to show!</p>
+  
+      <% if user_signed_in? %>
+        <p>Maybe you can help us by <%= link_to 'hosting an event', new_event_path %>?</p>
+      <% end %>
+    </div>
+  <% end %>
+  
+  <%= render 'shared/events_list',
+              events: @events.future,
+              list_name: 'Upcoming Events',
+              curr_user: @curr_user %>
+  <%= render 'shared/events_list',
+              events: @events.past,
+              list_name: 'Past Events',
+              curr_user: @curr_user %>
+</div>

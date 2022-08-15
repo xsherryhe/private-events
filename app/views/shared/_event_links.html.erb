@@ -6,7 +6,7 @@
 <% if event.attendees.include?(curr_user) %>
   <% event_registration = event.event_registrations.find_by(attendee_id: curr_user.id) %>
   <%= link_to 'Edit Registration for This Event', edit_event_registration_path(event, event_registration) %>
-  <%= link_to 'Unregister From This Event', 
+  <%= link_to 'Unregister From This Event',
               event_registration_path(event, event_registration),
               data: { turbo_confirm: 'Are you sure you wish to unregister from this event?',
                       turbo_method: :delete } %>
@@ -15,10 +15,10 @@
 <% end %>
 
 <% if event.creator == curr_user %>
-  <%= link_to 'Invite Users to This Event', new_event_invitation_path(event) %>  
+  <%= link_to 'Invite Users to This Event', new_event_invitation_path(event) %>
   <%= link_to 'Edit This Event', edit_event_path(event) %>
-  <%= link_to 'Delete This Event', 
-              event, 
+  <%= link_to 'Delete This Event',
+              event,
               data: { turbo_confirm: 'Are you sure you wish to delete this event?',
                       turbo_method: :delete } %>
 <% end %>

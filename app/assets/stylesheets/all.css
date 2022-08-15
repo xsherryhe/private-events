@@ -1,18 +1,24 @@
 @font-face {
-  font-family: 'primary-font';
+  font-family: 'Inter';
   src: url('Inter-VariableFont_slnt,wght.ttf') format('truetype-variations');
   font-weight: 1 999;
 }
 
+@font-face {
+  font-family: 'Grandstander';
+  src: url('Grandstander-VariableFont_wght.ttf') format('truetype-variations');
+  font-weight: 1 999;
+}
+
 :root {
-  --light-orange: rgb(255, 207, 118);
-  --dark-orange: rgb(255, 89, 0);
-  --purple: rgb(85, 0, 128);
   --secondary-color: rgb(0, 96, 99);
   --tertiary-color: rgb(0, 59, 61);
   --font-color: rgb(59, 59, 59);
   --off-white-color: rgb(225, 254, 255);
-  --site-font: 'primary-font';
+  --site-font: 'Inter';
+  --heading-font: 'Grandstander';
+  --horizontal-content-padding: 10vw;
+  --vertical-content-padding: 2rem;
 }
 
 html {
@@ -25,15 +31,40 @@ body {
   color: var(--font-color);
 }
 
+.view > * {
+  padding-left: var(--horizontal-content-padding);
+  padding-right: var(--horizontal-content-padding);
+}
+
+.view > header {
+  background-color: var(--font-color);
+  color: white;
+  padding-top: var(--vertical-content-padding);
+  padding-bottom: var(--vertical-content-padding);
+}
+
+.view > .page-content {
+  padding-top: var(--vertical-content-padding);
+  padding-bottom: var(--vertical-content-padding);
+}
+
+.view + .flash {
+  background-color: var(--font-color);
+  color: white;
+}
+
 .important-link {
   font-weight: 700;
 }
 
-.view {
-  margin: auto;
+h1 {
+  font-family: var(--sit-font);
+  font-size: 3rem;
+  font-weight: 700;
+  color: white;
 }
 
-h2, h3, h4, h5, p {
+h1, h2, h3, h4, h5, p, section {
   margin: 0;
 }
 
@@ -44,10 +75,6 @@ h2 {
 a {
   color: var(--secondary-color);
   text-decoration: none;
-}
-
-.back-link {
-  font-size: 0.85rem;
 }
 
 .field-with-errors {

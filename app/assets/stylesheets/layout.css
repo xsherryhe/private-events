@@ -11,6 +11,10 @@ body > header a {
   text-align: center;
 }
 
+body > header > * {
+  min-width: 0;
+}
+
 .nav-link {
   width: 15vw;
   display: flex;
@@ -77,10 +81,10 @@ body > header a {
 }
 
 .content {
-  padding: 1rem 4rem;
+  display: flex;
+  flex-direction: column-reverse;
 }
 
 .flash {
-  margin: 1rem 0;
-  color: var(--teal);
+  padding-top: 2rem;
 }

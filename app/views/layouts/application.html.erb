@@ -39,15 +39,17 @@
         </div>
       <% end %>
     </header>
-    <section class="content">
-      <div class="flash">
-        <% flash.each do |name, message| %>
-          <% unless name.include? 'page' %>
-            <p class="<%= name %>"><%= message %></p>
+    <div class="content">
+      <div class="view <%= yield :page_classes %>"><%= yield %></div>
+      <% if flash.any?%>
+        <div class="flash">
+          <% flash.each do |name, message| %>
+            <% unless name.include? 'page' %>
+              <p class="<%= name %>"><%= message %></p>
+            <% end %>
           <% end %>
-        <% end %>
-      </div>
-      <%= yield %>
-    </section>
+        </div>
+      <% end %>
+    </div>
   </body>
 </html>
