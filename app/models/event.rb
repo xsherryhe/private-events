@@ -10,6 +10,8 @@ class Event < ApplicationRecord
 
   enum :privacy_status, [:public_event, :private_event], default: :public_event
 
+  scope :order_by, ->(attribute, val) { order(attribute => val == 'old' ? :asc : :desc) }
+
   scope :future, (lambda do
     where('happening_date > ?', Date.current)
    .or(where(happening_date: Date.current).where('happening_time >= ?', Time.current))

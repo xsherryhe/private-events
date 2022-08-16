@@ -2,11 +2,19 @@
 <% unless events.empty? %>
   <div class="events-list">
     <h2 class="list-name"><%= list_name %></h2>
+    <div class="sort-select">
+      <%= form_with method: :get do |form| %>
+        <%= form.select "sort[#{list_type}]",
+                        [['Newest to Oldest', 'new'], ['Oldest to Newest', 'old']],
+                        { selected: @sort[list_type] },
+                        { onchange: 'this.form.submit()' } %>
+      <% end %>
+    </div>
     <% if list_byline ||= nil %>
       <h3 class="list-byline"><%= list_byline %></h3>
     <% end %>
     <div class="list-content">
-      <% events.includes(:creator, :attendees).each do |event| %>
+      <% events.includes(:creator, :attendees).order_by(:created_at, @sort[list_type]).each do |event| %>
         <div class="event">
           <div class="event-info">
             <h3 class="event-name"><%= link_to event.name, event %></h3>

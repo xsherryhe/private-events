@@ -16,20 +16,24 @@
 
 <%= render 'shared/events_list', 
             events: @user.created_events, 
+            list_type: 'created',
             list_name: "#{@user.username}’s Hosted Events",
             list_byline: @user == @curr_user ? (link_to 'Host A New Event', new_event_path) : nil,
             curr_user: @curr_user %>
 <%= render 'shared/events_list', 
             events: @attended_events.future, 
+            list_type: 'future',
             list_name: "#{@user.username}’s Upcoming Events to Attend", 
             curr_user: @curr_user %>
 <% if @user == @curr_user %>
   <%= render 'shared/events_list',
               events: Event.not_responded_invitation(@user),
+              list_type: 'invited',
               list_name: "#{@user.username}’s Invited Events",
               curr_user: @curr_user %>
 <% end %>
 <%= render 'shared/events_list', 
             events: @attended_events.past, 
+            list_type: 'past',
             list_name: "#{@user.username}’s Past Attended Events", 
             curr_user: @curr_user %>
