@@ -1,24 +1,28 @@
+<% content_for :page_classes do 'devise form sessions-new' end %>
+
 <h2>Log in</h2>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="field">
-    <%= f.label :login, "Login (Username or Email Address)" %><br />
+    <%= f.label :login, "Login (Username or Email Address)" %>
     <%= f.text_field :login, autofocus: true, autocomplete: "login" %>
   </div>
 
   <div class="field">
-    <%= f.label :password %><br />
+    <%= f.label :password %>
     <%= f.password_field :password, autocomplete: "current-password" %>
   </div>
 
   <% if devise_mapping.rememberable? %>
     <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+      <div class="selection">
+        <%= f.check_box :remember_me %>
+        <%= f.label :remember_me %>
+      </div>
     </div>
   <% end %>
 
-  <div class="actions">
+  <div class="actions submit">
     <%= f.submit "Log in" %>
   </div>
 <% end %>
