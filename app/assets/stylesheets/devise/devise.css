@@ -26,16 +26,16 @@
   padding-left: 1rem;
 }
 
-.devise .password-with-constraints {
+.devise .field-with-constraints {
   display: flex;
   gap: 2rem;
 }
 
-.devise .password-with-constraints .focus-box {
+.devise .field-with-constraints .focus-box {
   display: none;
 }
 
-.devise .password-with-constraints:focus-within .focus-box {
+.devise .field-with-constraints:focus-within .focus-box {
   display: block;
   height: 0;
 }
