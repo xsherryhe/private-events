@@ -31,7 +31,13 @@
     <h4 class="label">Attendees:</h4>
       <ul>
         <% attendees.each do |attendee| %>
-          <li><%= link_to attendee.username, user_path(attendee) %></li>
+          <li>
+            <%= link_to attendee.username, user_path(attendee) %>
+            <% if current_user == creator && notes = registration_notes(event, attendee) %>
+              <a class="attendee-notes-link">View Registration Notes</a>
+              <div class="attendee-notes hidden"><%= notes %></div>
+            <% end %>
+          </li>
         <% end %>
       </ul>
     <% if current_user == creator %>

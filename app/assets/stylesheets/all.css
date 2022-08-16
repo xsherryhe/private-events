@@ -14,6 +14,7 @@
   --secondary-color: rgb(0, 96, 99);
   --tertiary-color: rgb(0, 59, 61);
   --font-color: rgb(59, 59, 59);
+  --medium-font-color: rgb(145, 145, 145);
   --light-font-color: rgb(230, 230, 230);
   --off-white-color: rgb(225, 254, 255);
   --site-font: 'Inter';
@@ -85,4 +86,8 @@ a {
 
 a:hover {
   text-decoration: underline;
+}
+
+.hidden {
+  display: none;
 }

@@ -55,9 +55,7 @@ class EventsController < ApplicationController
   end
 
   def show
-    @event = Event.find(params[:id])
-    @creator = @event.creator
-    @attendees = @event.attendees
+    @event = Event.includes(:creator, :event_registrations, :attendees).find(params[:id])
   end
 
   def destroy

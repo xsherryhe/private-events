@@ -1,7 +1,9 @@
 <% content_for :page_classes do 'events events-show' end %>
 <h4 class="event-name">Event: <%= @event.name %></h4>
 <% if @event.full_access?(current_user) %>
-  <%= render 'details', event: @event, creator: @creator, attendees: @attendees %>
+  <%= render 'details', event: @event, 
+                        creator: @event.creator, 
+                        attendees: @event.attendees %>
 <% else %>
   <p>This event is private.</p>
 <% end %>

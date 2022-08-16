@@ -10,3 +10,14 @@
 .event-details .event-user-info {
   margin-top: 1rem;
 }
+
+.event-details .attendee-notes-link {
+  margin-left: 0.3rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.event-details .attendee-notes {
+  font-size: 1rem;
+  max-width: 38vw;
+}
