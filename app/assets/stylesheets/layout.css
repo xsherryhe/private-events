@@ -76,6 +76,10 @@ body > header > * {
   background-color: var(--off-white-color);
 }
 
+.nav-link, .user-link {
+  cursor: pointer;
+}
+
 .user-link a {
   color: var(--font-color);
 }
