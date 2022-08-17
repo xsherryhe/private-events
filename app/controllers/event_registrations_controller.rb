@@ -29,7 +29,7 @@ class EventRegistrationsController < ApplicationController
                                              .merge(attended_event_id: @event.id))
     begin
       if @event_registration.save
-        flash[:notice] = "Successfully registed for event “#{@event.name}”!"
+        flash[:notice] = "Successfully registered for event “#{@event.name}”!"
         redirect_to @event
       else
         render :new, status: :unprocessable_entity
