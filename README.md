@@ -3,4 +3,4 @@ This project is a website with similar functionality to [Eventbrite](https://www
 
 The project primarily demonstrates more advanced concepts related to Rails Active Record associations, including custom class names and foreign keys, "through" associations and sources, self joins, and creation/destruction of association objects.
 
-This project is currently in progress.
+Run this project [here](https://fathomless-thicket-95460.herokuapp.com/).
