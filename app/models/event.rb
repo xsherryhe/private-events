@@ -1,8 +1,9 @@
 class Event < ApplicationRecord
   include StringParser
   before_validation :build_invitations
-  validates :name, presence: true
   belongs_to :creator, class_name: 'User'
+  before_validation :set_happening_at
+  validates :name, presence: true
   has_many :event_registrations, foreign_key: 'attended_event_id', dependent: :destroy
   has_many :attendees, through: :event_registrations
   has_many :invitations, foreign_key: 'invited_event_id', dependent: :destroy
@@ -10,18 +11,33 @@ class Event < ApplicationRecord
 
   enum :privacy_status, [:public_event, :private_event], default: :public_event
 
-  scope :order_by, ->(attribute, val) { order(attribute => val == 'old' ? :asc : :desc) }
+  scope :order_by, (lambda do |sort|
+    sort ||= 'happening_at-asc'
+    attribute, dir = (sort).split('-').map(&:to_sym)
+    if attribute == :happening_at
+      order(Arel.sql("CASE WHEN happening_date IS NULL 
+                          THEN events.updated_at
+                          ELSE happening_at 
+                          END #{dir.to_s}"))
+    else
+      order(attribute => dir)
+    end
+  end)
 
   scope :future, (lambda do
-    where('happening_date > ?', Date.current)
-   .or(where(happening_date: Date.current).where('happening_time >= ?', Time.current))
-   .or(where(happening_date: Date.current).where(happening_time: nil))
-   .or(where(happening_date: nil))
+    where('happening_at >= ?', DateTime.current)
+    .or(where(happening_date: nil)
+       .where('happening_at >= ?', 
+              Time.new(2000, 1, 1, Time.now.hour, Time.now.min, Time.now.sec, 0)))
+    .or(where(happening_at: nil))
   end)
 
   scope :past, (lambda do
-    where('happening_date < ?', Date.current)
-   .or(where(happening_date: Date.current).where('happening_time < ?', Time.current))
+    where.not(happening_at: nil)
+    .and(where.not(happening_date: nil)
+              .where('happening_at < ?', DateTime.current)
+         .or(where(happening_date: nil)
+             .where('happening_at < ?', Time.new(2000, 1, 1, Time.now.hour, Time.now.min, Time.now.sec, 0))))
   end)
 
   scope :not_responded_invitation, (lambda do |invitee|
@@ -41,5 +57,20 @@ class Event < ApplicationRecord
     parse_list(invitee_usernames).each do |invitee_username|
       invitations.build(invitee_username: invitee_username)
     end
+  end
+
+  private
+
+  def set_happening_at
+    self.happening_at = 
+      if happening_date && happening_time
+        DateTime.new(happening_date.year, happening_date.month, happening_date.day,
+                     happening_time.hour, happening_time.min, happening_time.sec)
+      elsif happening_date
+        happening_date.to_datetime
+      elsif happening_time
+        happening_time.to_datetime
+      else nil
+      end
   end
 end

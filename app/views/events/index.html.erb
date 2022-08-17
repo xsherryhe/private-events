@@ -11,15 +11,15 @@
       <p>Maybe you can help us by <%= link_to 'hosting an event', new_event_path %>?</p>
     <% end %>
   </div>
+<% else %>
+  <%= render 'shared/sort_select_form', sort: @sort %>
 <% end %>
 
 <%= render 'shared/events_list',
             events: @events.future,
-            list_type: 'future',
             list_name: 'Upcoming Events',
             curr_user: @curr_user %>
 <%= render 'shared/events_list',
             events: @events.past,
-            list_type: 'past',
             list_name: 'Past Events',
             curr_user: @curr_user %>

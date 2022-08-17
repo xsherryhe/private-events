@@ -1,0 +1,14 @@
+.sort-select {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: var(--vertical-content-padding);
+}
+
+.sort-select label {
+  margin-right: 0.2rem;
+  font-size: 1.1rem;
+}
+
+.sort-select select {
+  padding: 0.2rem;
+}

@@ -3,7 +3,7 @@
 }
 
 .events-list {
-  padding-top: var(--vertical-content-padding);
+  margin-top: var(--vertical-content-padding);
   border-bottom: 2px solid var(--font-color);
 }
 

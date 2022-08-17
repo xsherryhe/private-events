@@ -2,8 +2,8 @@ class EventsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
 
   def index
-    @sort = sort_params || {}
-    @events = Event.all
+    @sort = params[:sort]
+    @events = Event.order_by(@sort)
     @curr_user = current_user
   end
 
@@ -82,10 +82,6 @@ class EventsController < ApplicationController
                                   :privacy_status,
                                   :invitee_usernames,
                                   :description)
-  end
-
-  def sort_params
-    params[:sort]&.permit(:future, :past)
   end
 
   def set_valid_invitee_usernames

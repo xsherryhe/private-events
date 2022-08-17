@@ -1,5 +1,5 @@
 module StringParser
   def parse_list(list)
-    list.split(/, */)
+    (list || '').split(/, */)
   end
 end
