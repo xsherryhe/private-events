@@ -1,11 +1,11 @@
 <div class="sort-select">
   <%= form_with method: :get do |form| %>
     <strong><%= form.label :sort, 'Sort by:' %></strong>
-    <%= form.select :sort, [['Time of Event: Soonest First', 'happening_at-asc'],
-                            ['Time of Event: Latest First', 'happening_at-desc'],
-                            ['Name: Alphabetical', 'name-asc'],
-                            ['Time Updated: Newest First', 'events.updated_at-desc'],
-                            ['Time Created: Newest First', 'events.created_at-desc']],
+    <%= form.select :sort, [['Time of Event: Soonest First', 'tsoon'],
+                            ['Time of Event: Latest First', 'tlate'],
+                            ['Name: Alphabetical', 'name'],
+                            ['Time Updated: Newest First', 'updated'],
+                            ['Time Created: Newest First', 'created']],
                     { selected: sort },
                     { onchange: 'this.form.submit()' } %>
   <% end %>

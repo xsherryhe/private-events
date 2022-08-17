@@ -12,8 +12,14 @@ class Event < ApplicationRecord
   enum :privacy_status, [:public_event, :private_event], default: :public_event
 
   scope :order_by, (lambda do |sort|
-    sort ||= 'happening_at-asc'
-    attribute, dir = (sort).split('-').map(&:to_sym)
+    attribute, dir = {
+      tsoon: %i(happening_at asc),
+      tlate: %i(happening_at desc),
+      name: %i(name asc),
+      updated: %i(events.updated_at desc),
+      created: %i(events.created_at desc)
+    }[(sort || :tsoon).to_sym]
+    
     if attribute == :happening_at
       order(Arel.sql("CASE WHEN happening_date IS NULL 
                           THEN events.updated_at
