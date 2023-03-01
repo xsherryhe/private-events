@@ -5,6 +5,14 @@
 }
 
 .events-index .page-header {
-  padding-top: 12vh;
-  padding-bottom: 12vh;
+  padding-top: 11vh;
+  padding-bottom: 11vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+
+.events-index .page-header img {
+  width: 2.5rem;
 }

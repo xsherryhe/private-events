@@ -1,6 +1,8 @@
 <% content_for :page_classes do 'events events-index' end %>
 <% content_for :page_header do %>
+  <%= image_tag asset_path('calendar.svg') %>
   <h1>Events Central</h1>
+  <%= image_tag asset_path('calendar.svg') %>
 <% end %>
 
 <% if @events.empty? %>
